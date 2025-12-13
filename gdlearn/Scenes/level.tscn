@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://57d5edw8mtsl"]
+
+[ext_resource type="Texture2D" uid="uid://bv54uagemx8kc" path="res://kenney_space-shooter-redux/Backgrounds/darkPurple.png" id="1_k5f4k"]
+[ext_resource type="PackedScene" uid="uid://oykcic43owi1" path="res://Scenes/player.tscn" id="2_6phgx"]
+[ext_resource type="PackedScene" uid="uid://c35ea2h1y2v5j" path="res://Scenes/meteor.tscn" id="3_6phgx"]
+
+[node name="Level" type="Node2D"]
+
+[node name="BG" type="Sprite2D" parent="."]
+position = Vector2(575.99994, 324)
+scale = Vector2(4.5, 2.53125)
+texture = ExtResource("1_k5f4k")
+
+[node name="Player" parent="." instance=ExtResource("2_6phgx")]
+
+[node name="Meteor" parent="." instance=ExtResource("3_6phgx")]
+position = Vector2(307, 128)
