@@ -1,8 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://57d5edw8mtsl"]
+[gd_scene load_steps=7 format=3 uid="uid://57d5edw8mtsl"]
 
 [ext_resource type="Texture2D" uid="uid://bv54uagemx8kc" path="res://kenney_space-shooter-redux/Backgrounds/darkPurple.png" id="1_k5f4k"]
 [ext_resource type="PackedScene" uid="uid://oykcic43owi1" path="res://Scenes/player.tscn" id="2_6phgx"]
 [ext_resource type="PackedScene" uid="uid://c35ea2h1y2v5j" path="res://Scenes/meteor.tscn" id="3_6phgx"]
+[ext_resource type="Script" uid="uid://eokic1al23k4" path="res://Scenes/timer.gd" id="4_81xng"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6phgx"]
+size = Vector2(100, 720)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_81xng"]
+size = Vector2(1480, 143)
 
 [node name="Level" type="Node2D"]
 
@@ -12,6 +19,39 @@ scale = Vector2(6.0527344, 3.6445313)
 texture = ExtResource("1_k5f4k")
 
 [node name="Player" parent="." instance=ExtResource("2_6phgx")]
+position = Vector2(649, 333)
 
 [node name="Meteor" parent="." instance=ExtResource("3_6phgx")]
 position = Vector2(307, 128)
+
+[node name="Borders" type="Node2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Borders"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/StaticBody2D"]
+position = Vector2(1330, 360)
+shape = SubResource("RectangleShape2D_6phgx")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="Borders"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/StaticBody2D2"]
+position = Vector2(-50, 360)
+shape = SubResource("RectangleShape2D_6phgx")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="Borders"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/StaticBody2D3"]
+position = Vector2(642, -72)
+shape = SubResource("RectangleShape2D_81xng")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="Borders"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/StaticBody2D4"]
+position = Vector2(629, 792)
+shape = SubResource("RectangleShape2D_81xng")
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+script = ExtResource("4_81xng")
+
+[connection signal="timeout" from="Timer" to="Timer" method="_on_timeout"]
