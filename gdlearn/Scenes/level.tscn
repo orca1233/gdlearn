@@ -1,9 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://57d5edw8mtsl"]
+[gd_scene load_steps=6 format=3 uid="uid://57d5edw8mtsl"]
 
 [ext_resource type="Texture2D" uid="uid://bv54uagemx8kc" path="res://kenney_space-shooter-redux/Backgrounds/darkPurple.png" id="1_k5f4k"]
 [ext_resource type="Script" uid="uid://dy8bvmy5i4mmq" path="res://Scenes/level.gd" id="1_wqkje"]
 [ext_resource type="PackedScene" uid="uid://oykcic43owi1" path="res://Scenes/player.tscn" id="2_6phgx"]
-[ext_resource type="PackedScene" uid="uid://c35ea2h1y2v5j" path="res://Scenes/meteor.tscn" id="3_6phgx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6phgx"]
 size = Vector2(100, 720)
@@ -21,9 +20,6 @@ texture = ExtResource("1_k5f4k")
 
 [node name="Player" parent="." instance=ExtResource("2_6phgx")]
 position = Vector2(649, 333)
-
-[node name="Meteor" parent="." instance=ExtResource("3_6phgx")]
-position = Vector2(307, 128)
 
 [node name="Borders" type="Node2D" parent="."]
 
@@ -51,7 +47,9 @@ shape = SubResource("RectangleShape2D_81xng")
 position = Vector2(629, 792)
 shape = SubResource("RectangleShape2D_81xng")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Meteors" type="Node2D" parent="."]
+
+[node name="MeteorTimer" type="Timer" parent="."]
 autostart = true
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="MeteorTimer" to="." method="_on_meteor_timer_timeout"]
