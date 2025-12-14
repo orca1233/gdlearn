@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://57d5edw8mtsl"]
 
 [ext_resource type="Texture2D" uid="uid://bv54uagemx8kc" path="res://kenney_space-shooter-redux/Backgrounds/darkPurple.png" id="1_k5f4k"]
+[ext_resource type="Script" uid="uid://dy8bvmy5i4mmq" path="res://Scenes/level.gd" id="1_wqkje"]
 [ext_resource type="PackedScene" uid="uid://oykcic43owi1" path="res://Scenes/player.tscn" id="2_6phgx"]
 [ext_resource type="PackedScene" uid="uid://c35ea2h1y2v5j" path="res://Scenes/meteor.tscn" id="3_6phgx"]
-[ext_resource type="Script" uid="uid://eokic1al23k4" path="res://Scenes/timer.gd" id="4_81xng"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6phgx"]
 size = Vector2(100, 720)
@@ -12,6 +12,7 @@ size = Vector2(100, 720)
 size = Vector2(1480, 143)
 
 [node name="Level" type="Node2D"]
+script = ExtResource("1_wqkje")
 
 [node name="BG" type="Sprite2D" parent="."]
 position = Vector2(699, 383.00003)
@@ -52,6 +53,5 @@ shape = SubResource("RectangleShape2D_81xng")
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true
-script = ExtResource("4_81xng")
 
-[connection signal="timeout" from="Timer" to="Timer" method="_on_timeout"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
