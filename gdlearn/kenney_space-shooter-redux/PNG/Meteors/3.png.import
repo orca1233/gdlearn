@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cpxttbhgs8i33"
-path="res://.godot/imported/meteorBrown_med3.png-a196aecc69f12b87d5e882c95383e1e5.ctex"
+uid="uid://pk5s6mfhofrl"
+path="res://.godot/imported/3.png-699d1655dc987ae964707351cac8e176.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://kenney_space-shooter-redux/PNG/Meteors/meteorBrown_med3.png"
-dest_files=["res://.godot/imported/meteorBrown_med3.png-a196aecc69f12b87d5e882c95383e1e5.ctex"]
+source_file="res://kenney_space-shooter-redux/PNG/Meteors/3.png"
+dest_files=["res://.godot/imported/3.png-699d1655dc987ae964707351cac8e176.ctex"]
 
 [params]
 

@@ -16,6 +16,9 @@ func _ready() -> void:
 	direction_x = rng.randf_range(-1, 1)
 	rotationspeed = rng.randi_range(40, 100)
 	
+	var path: String = "res://kenney_space-shooter-redux/PNG/Meteors/" + str(rng.randi_range(1,6)) + ".png"
+	$MeteorImage.texture = load(path)
+
 func _process(delta: float) -> void:
 	position += Vector2(direction_x, 1.0) * speed * delta
 	rotation_degrees += rotationspeed * delta

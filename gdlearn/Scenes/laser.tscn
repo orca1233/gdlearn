@@ -24,6 +24,8 @@ radius = 4.0
 height = 54.0
 
 [node name="Laser" type="Area2D"]
+collision_layer = 8
+collision_mask = 2
 script = SubResource("GDScript_r1bh0")
 speed = 395
 
