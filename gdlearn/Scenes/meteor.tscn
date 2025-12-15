@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dlv2etqjfg7bs" path="res://kenney_space-shooter-redux/PNG/Meteors/meteorGrey_med2.png" id="2_wm1ig"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5civa"]
-radius = 19.026299
+radius = 19.03
 
 [node name="Meteor" type="Area2D"]
 collision_layer = 2
@@ -17,4 +17,5 @@ texture = ExtResource("2_wm1ig")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_5civa")
 
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

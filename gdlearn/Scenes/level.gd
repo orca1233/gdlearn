@@ -4,7 +4,11 @@ extends Node2D
 var meteor_scene : PackedScene = load("res://Scenes/meteor.tscn")
 var laser_scene : PackedScene = load("res://Scenes/laser.tscn")
 
+# HEALTH
+var health : int = 3
+
 func _ready() -> void:
+	get_tree().call_group('ui', 'set_health', health)
 	var size := get_viewport().get_visible_rect().size
 	var rng := RandomNumberGenerator.new()
 	for star in $Stars.get_children():
@@ -24,10 +28,15 @@ func _on_meteor_timer_timeout() -> void:
 	$Meteors.add_child(meteor)
 	
 	# 시그널 연결
-	meteor.connect("collision", on_meteor_collision)
+	meteor.connect("collision", _on_meteor_collision)
 
-func on_meteor_collision():
-	print("meteor collision FUCK")
+func _on_meteor_collision():
+	health -= 1
+	get_tree().call_group('ui', 'set_health', health)
+	if health <= 0:
+		# 게임 오버 방식이 두 개 이상이면 인스턴스화? gemini한테 물어보기
+		# 왜 packed가 있는지?
+		get_tree().change_scene_to_file("res://Scenes/gameover.tscn")
 
 # 1. 씬 프리로드 
 # 2. 인스턴스화

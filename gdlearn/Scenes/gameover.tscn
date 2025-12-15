@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dychxogfx8ihu"]
+[gd_scene load_steps=3 format=3 uid="uid://dychxogfx8ihu"]
 
 [ext_resource type="FontFile" uid="uid://dkt75r1tye2ec" path="res://kenney_space-shooter-redux/Bonus/kenvector_future.ttf" id="1_fg4p2"]
+[ext_resource type="Script" uid="uid://cd3vdhqe5k3kh" path="res://Scenes/gameover.gd" id="1_qpupn"]
 
 [node name="GameOver" type="Control"]
 layout_mode = 3
@@ -9,6 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_qpupn")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -42,7 +44,7 @@ horizontal_alignment = 1
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_fg4p2")
 theme_override_font_sizes/font_size = 20
-text = "YOUR SCORE : UR MOM"
+text = "YOUR SCORE : "
 horizontal_alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
