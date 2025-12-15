@@ -5,6 +5,8 @@ var speed : int
 var rotationspeed : int
 var direction_x : float
 
+signal collision
+
 func _ready() -> void:
 	var width = get_viewport().get_visible_rect().size[0]
 	var random_x = rng.randi_range(0, width) # 1280
@@ -24,5 +26,4 @@ func _process(delta: float) -> void:
 	rotation_degrees += rotationspeed * delta
 
 func _on_body_entered(body: Node2D) -> void:
-	print("body entered")
-	print(body)
+	collision.emit()

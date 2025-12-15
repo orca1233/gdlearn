@@ -1,0 +1,61 @@
+[gd_scene load_steps=2 format=3 uid="uid://dychxogfx8ihu"]
+
+[ext_resource type="FontFile" uid="uid://dkt75r1tye2ec" path="res://kenney_space-shooter-redux/Bonus/kenvector_future.ttf" id="1_fg4p2"]
+
+[node name="GameOver" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.22745098, 0.18039216, 0.24705882, 1)
+metadata/_edit_lock_ = true
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_fg4p2")
+theme_override_font_sizes/font_size = 50
+text = "GAME OVER"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_fg4p2")
+theme_override_font_sizes/font_size = 20
+text = "YOUR SCORE : UR MOM"
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_left = 461.0
+offset_top = 682.0
+offset_right = 819.0
+offset_bottom = 720.0
+theme_override_constants/margin_bottom = 15
+
+[node name="Label" type="Label" parent="MarginContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_fg4p2")
+theme_override_font_sizes/font_size = 20
+text = "SPACE TO START AGAIN"
+horizontal_alignment = 1
