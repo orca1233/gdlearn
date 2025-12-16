@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://b8wuxfvtrweoh"
+
+[deps]
+
+files=["res://Assets/Datasheets/CharacterTable.CharacterName.translation", "res://Assets/Datasheets/CharacterTable.PortraitPath.translation", "res://Assets/Datasheets/CharacterTable.ColorCode.translation"]
+
+source_file="res://Assets/Datasheets/CharacterTable.csv"
+dest_files=["res://Assets/Datasheets/CharacterTable.CharacterName.translation", "res://Assets/Datasheets/CharacterTable.PortraitPath.translation", "res://Assets/Datasheets/CharacterTable.ColorCode.translation"]
+
+[params]
+
+compress=true
+delimiter=0

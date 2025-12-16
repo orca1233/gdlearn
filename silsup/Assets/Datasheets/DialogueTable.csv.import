@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://ccyb8lk60i6mk"
+
+[deps]
+
+files=["res://Assets/Datasheets/DialogueTable.CharacterID.translation", "res://Assets/Datasheets/DialogueTable.CharacterPos.translation", "res://Assets/Datasheets/DialogueTable.CharacterExpression.translation", "res://Assets/Datasheets/DialogueTable.Dialogue.translation"]
+
+source_file="res://Assets/Datasheets/DialogueTable.csv"
+dest_files=["res://Assets/Datasheets/DialogueTable.CharacterID.translation", "res://Assets/Datasheets/DialogueTable.CharacterPos.translation", "res://Assets/Datasheets/DialogueTable.CharacterExpression.translation", "res://Assets/Datasheets/DialogueTable.Dialogue.translation"]
+
+[params]
+
+compress=true
+delimiter=0

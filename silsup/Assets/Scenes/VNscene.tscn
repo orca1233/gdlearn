@@ -1,0 +1,91 @@
+[gd_scene load_steps=3 format=3 uid="uid://dbwq1lfmsbt37"]
+
+[ext_resource type="Script" uid="uid://u4opsetnymul" path="res://Assets/Scenes/vn_scene.gd" id="1_stfp2"]
+[ext_resource type="Texture2D" uid="uid://bjvjhm24h6y4r" path="res://Assets/Datasheets/67809969-nature-game-background-suitable-for-tapping-action-and-shooting-game.jpg" id="2_sdtry"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="VNScene" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_stfp2")
+
+[node name="BackGround" type="TextureRect" parent="VNScene"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -412.5
+offset_top = -650.0
+offset_right = 412.5
+offset_bottom = 650.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_sdtry")
+stretch_mode = 2
+
+[node name="CharacterLayer" type="Control" parent="VNScene"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="LeftPos" type="Marker2D" parent="VNScene/CharacterLayer"]
+position = Vector2(200, 900)
+
+[node name="RightPos" type="Marker2D" parent="VNScene/CharacterLayer"]
+position = Vector2(1080, 900)
+
+[node name="ActivePortrait" type="Sprite2D" parent="VNScene/CharacterLayer"]
+
+[node name="DialoguePanel" type="Panel" parent="VNScene"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -640.0
+offset_top = -296.0
+offset_right = 640.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="VNScene/DialoguePanel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 3
+
+[node name="NameLabel" type="Label" parent="VNScene/DialoguePanel/MarginContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "시로코"
+vertical_alignment = 1
+
+[node name="TextLabel" type="RichTextLabel" parent="VNScene/DialoguePanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -580.375
+offset_top = -80.88281
+offset_right = 580.375
+offset_bottom = 80.88281
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 40
+text = "가나다가나다가나다가나다가나다가나다가나다가나다가나다가나다가나다가나다가나다가나다가나다가나다가나다가나다가나다가나다가나다가나다가나다가나다가나다가나다가나다가나다"
+
+[node name="Next" type="TextureRect" parent="VNScene/DialoguePanel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0

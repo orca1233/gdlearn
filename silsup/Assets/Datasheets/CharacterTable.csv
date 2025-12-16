@@ -1,3 +1,3 @@
 CharacterID,CharacterName,PortraitPath,ColorCode
-1,시로코,gdlearn\silsup\Assets\Portrait\shiroko.png,#a8efe9
-2,히나,gdlearn\silsup\Assets\Portrait\hina.png,#b4a8ef
+1,시로코,res://Assets/Portrait/shiroko.png,#a8efe9
+2,히나,res:///Assets/Portrait/hina.png,#b4a8ef
