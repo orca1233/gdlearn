@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://cgsuoq6f5yp17"]
+
+[ext_resource type="Script" uid="uid://dnym45txvxssj" path="res://enemyBullet/enemy_bullet.gd" id="1_avnh1"]
+[ext_resource type="Texture2D" uid="uid://bqh1v8dybny2e" path="res://Assets/Danmaku/Shot_01.png" id="1_va3kr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_avnh1"]
+atlas = ExtResource("1_va3kr")
+region = Rect2(48.532585, 305.76886, 15.681702, 25.964935)
+
+[node name="EnemyBullet" type="Area2D"]
+script = ExtResource("1_avnh1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_avnh1")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-7, 12, -7, 8, 0, -11, 7, 8, 7, 12, 5, 12, 0, 7, -5, 12)
