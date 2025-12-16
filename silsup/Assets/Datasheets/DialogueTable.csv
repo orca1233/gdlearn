@@ -1,0 +1,8 @@
+ScenarioID,CharacterID,CharacterPos,CharacterExpression,Dialogue
+1,1,L,Idle,안녕
+2,2,R,Idle,안녕하세요
+3,1,L,Idle,안녕
+4,2,R,Idle,안녕하세요?
+5,2,R,Idle,안녕하세요.
+6,2,R,Idle,안녕하실까?
+7,1,L,Idle,네
