@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://07jk8mvg2bqc"]
+[gd_scene load_steps=6 format=3 uid="uid://07jk8mvg2bqc"]
 
-[ext_resource type="Script" uid="uid://x43eono1xn32" path="res://boss/boss_1.gd" id="1_a8swx"]
+[ext_resource type="Script" uid="uid://x43eono1xn32" path="res://Boss/boss_1.gd" id="1_a8swx"]
 [ext_resource type="Texture2D" uid="uid://l44ux140up27" path="res://Assets/Danmaku/Shot_02.png" id="2_1x1n5"]
+[ext_resource type="PackedScene" uid="uid://cgsuoq6f5yp17" path="res://enemyBullet/enemyBullet.tscn" id="2_f666b"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_f666b"]
 atlas = ExtResource("2_1x1n5")
@@ -10,16 +11,19 @@ region = Rect2(1.3622208, 259.91193, 125.71313, 122.352844)
 [sub_resource type="CircleShape2D" id="CircleShape2D_b3vv7"]
 radius = 54.230988
 
-[node name="boss1" type="Node2D"]
+[node name="boss1" type="Area2D"]
 script = ExtResource("1_a8swx")
+bullet_node = ExtResource("2_f666b")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(592, 522)
 texture = SubResource("AtlasTexture_f666b")
 
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(592, 522)
 rotation = -3.1415925
 shape = SubResource("CircleShape2D_b3vv7")
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

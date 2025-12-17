@@ -15,3 +15,7 @@ texture = SubResource("AtlasTexture_avnh1")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-7, 12, -7, 8, 0, -11, 7, 8, 7, 12, 5, 12, 0, 7, -5, 12)
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_exited"]
