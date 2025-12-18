@@ -21,12 +21,12 @@ texture = ExtResource("1_pk0u0")
 
 [node name="Gameplaycontainer" type="Node2D" parent="."]
 
-[node name="Enemycontainer" type="Node2D" parent="Gameplaycontainer"]
-
 [node name="Bulletcontainer" type="Node2D" parent="Gameplaycontainer"]
 
 [node name="Player" parent="Gameplaycontainer" instance=ExtResource("1_0jfkj")]
 position = Vector2(576, 600)
+
+[node name="Enemycontainer" type="Node2D" parent="Gameplaycontainer"]
 
 [node name="UIcanvas" parent="." instance=ExtResource("3_6h5vk")]
 
