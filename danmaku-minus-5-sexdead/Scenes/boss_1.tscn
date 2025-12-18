@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://07jk8mvg2bqc"]
 
-[ext_resource type="Script" uid="uid://x43eono1xn32" path="res://Boss/boss_1.gd" id="1_a8swx"]
+[ext_resource type="Script" uid="uid://x43eono1xn32" path="res://Scripts/boss_1.gd" id="1_a8swx"]
 [ext_resource type="Texture2D" uid="uid://l44ux140up27" path="res://Assets/Danmaku/Shot_02.png" id="2_1x1n5"]
-[ext_resource type="PackedScene" uid="uid://cgsuoq6f5yp17" path="res://enemyBullet/enemyBullet.tscn" id="2_f666b"]
+[ext_resource type="PackedScene" uid="uid://cgsuoq6f5yp17" path="res://Scenes/enemy_bullet.tscn" id="2_f666b"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_f666b"]
 atlas = ExtResource("2_1x1n5")

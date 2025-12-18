@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cxeldxtudj6tm"]
 
-[ext_resource type="PackedScene" uid="uid://bkt3kddvmrluk" path="res://Assets/Scenes/player.tscn" id="1_0jfkj"]
+[ext_resource type="PackedScene" uid="uid://bkt3kddvmrluk" path="res://Scenes/player.tscn" id="1_0jfkj"]
 [ext_resource type="Texture2D" uid="uid://cdlmovu675luv" path="res://Assets/BG/BG_forest.png" id="1_pk0u0"]
 
 [node name="Gamescene" type="Node2D"]

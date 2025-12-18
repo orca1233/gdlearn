@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://cgsuoq6f5yp17"]
 
-[ext_resource type="Script" uid="uid://dnym45txvxssj" path="res://enemyBullet/enemy_bullet.gd" id="1_avnh1"]
+[ext_resource type="Script" uid="uid://dnym45txvxssj" path="res://Scripts/enemy_bullet.gd" id="1_avnh1"]
 [ext_resource type="Texture2D" uid="uid://bqh1v8dybny2e" path="res://Assets/Danmaku/Shot_01.png" id="1_va3kr"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_avnh1"]
