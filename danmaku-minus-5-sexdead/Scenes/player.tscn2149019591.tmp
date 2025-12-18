@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bkt3kddvmrluk"]
+[gd_scene load_steps=6 format=3 uid="uid://bkt3kddvmrluk"]
 
 [ext_resource type="Texture2D" uid="uid://dvrg17cibrfs4" path="res://Assets/Portrait/playerShip1_blue.png" id="1_6cd4h"]
 [ext_resource type="Script" uid="uid://bx6f0pra6xw6p" path="res://Scripts/player.gd" id="2_7dd06"]
@@ -9,10 +9,6 @@ atlas = ExtResource("3_38rej")
 region = Rect2(1224.2388, 200.45462, 47.947266, 47.341995)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_38rej"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6t5aa"]
-atlas = ExtResource("3_38rej")
-region = Rect2(1280, 704, 64, 64)
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 script = ExtResource("2_7dd06")
@@ -27,15 +23,3 @@ texture = SubResource("AtlasTexture_t1xgp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_38rej")
-
-[node name="BulletPos" type="Marker2D" parent="."]
-position = Vector2(0, -28.09)
-scale = Vector2(0.185, 0.185)
-
-[node name="Sprite2D" type="Sprite2D" parent="BulletPos"]
-texture = SubResource("AtlasTexture_6t5aa")
-
-[node name="shoot_timer" type="Timer" parent="."]
-one_shot = true
-
-[connection signal="timeout" from="shoot_timer" to="." method="_on_shoot_timer_timeout"]

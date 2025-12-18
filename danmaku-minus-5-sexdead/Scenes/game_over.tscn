@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://c2vubf5oytncc"]
+[gd_scene load_steps=2 format=3 uid="uid://c2vubf5oytncc"]
+
+[ext_resource type="Script" uid="uid://bprcmjvpk80kk" path="res://Scenes/game_over.gd" id="1_ojehl"]
 
 [node name="GameOver" type="Control"]
 layout_mode = 3
@@ -7,6 +9,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_ojehl")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -58,5 +61,5 @@ theme_override_constants/margin_bottom = 15
 [node name="Label" type="Label" parent="MarginContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
-text = "SPACE TO START AGAIN"
+text = "PRESS Z OR / TO START AGAIN"
 horizontal_alignment = 1
