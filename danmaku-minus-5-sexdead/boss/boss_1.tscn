@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://07jk8mvg2bqc"]
+
+[ext_resource type="Script" uid="uid://x43eono1xn32" path="res://Boss/boss_1.gd" id="1_a8swx"]
+[ext_resource type="Texture2D" uid="uid://l44ux140up27" path="res://Assets/Danmaku/Shot_02.png" id="2_1x1n5"]
+[ext_resource type="PackedScene" uid="uid://cgsuoq6f5yp17" path="res://enemyBullet/enemyBullet.tscn" id="2_f666b"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f666b"]
+atlas = ExtResource("2_1x1n5")
+region = Rect2(1.3622208, 259.91193, 125.71313, 122.352844)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_b3vv7"]
+radius = 54.230988
+
+[node name="boss1" type="CharacterBody2D"]
+script = ExtResource("1_a8swx")
+bullet_node = ExtResource("2_f666b")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_f666b")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = -3.1415925
+shape = SubResource("CircleShape2D_b3vv7")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.05
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
