@@ -1,25 +1,21 @@
-[gd_scene load_steps=5 format=3 uid="uid://cgsuoq6f5yp17"]
+[gd_scene load_steps=4 format=3 uid="uid://c5btjhmhi6l4x"]
 
-[ext_resource type="Script" uid="uid://dnym45txvxssj" path="res://Scripts/enemy_bullet.gd" id="1_avnh1"]
-[ext_resource type="Texture2D" uid="uid://bqh1v8dybny2e" path="res://Assets/Danmaku/Shot_01.png" id="1_va3kr"]
+[ext_resource type="Script" uid="uid://l448d8cq82mq" path="res://Assets/Scripts/enemy_bullet.gd" id="1_xigdn"]
+[ext_resource type="Texture2D" uid="uid://bqh1v8dybny2e" path="res://Assets/Danmaku/Shot_01.png" id="2_4wrx5"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_avnh1"]
-atlas = ExtResource("1_va3kr")
-region = Rect2(47.883873, 224, 16.116127, 16)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_avnh1"]
-radius = 8.062258
+[sub_resource type="CircleShape2D" id="CircleShape2D_dn54t"]
+radius = 6.0
 
 [node name="EnemyBullet" type="Area2D"]
-position = Vector2(885, 353)
-script = ExtResource("1_avnh1")
+script = ExtResource("1_xigdn")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = SubResource("AtlasTexture_avnh1")
+[node name="Shot01" type="Sprite2D" parent="."]
+scale = Vector2(0.2916666, 0.2916666)
+texture = ExtResource("2_4wrx5")
+region_enabled = true
+region_rect = Rect2(1224, 904, 48, 48)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_avnh1")
+shape = SubResource("CircleShape2D_dn54t")
 
-[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
-
-[connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_exited"]
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]

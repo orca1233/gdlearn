@@ -1,11 +1,17 @@
-extends Node2D
-# area2D로 하는게 더 좋을듯 node2D는 충돌 계산해서 성능 안좋다고함
-# 둘이 만났을때 바로 트리거되는건 area2D가 더 유리하다고함
-var speed = 300
-var direction = Vector2.RIGHT
-	
-func _physics_process(delta: float) -> void:
+extends Area2D
+
+var direction = Vector2.ZERO
+@export var speed = 400.0
+
+func set_direction(dir: Vector2):
+	direction = dir
+	# 총알 이미지의 방향을 이동 방향에 맞게 회전 (선택 사항)
+	rotation = dir.angle()
+
+func _process(delta):
+	print("내 방향은: ", direction)
 	position += direction * speed * delta
 
-func _on_visible_on_screen_enabler_2d_screen_exited() -> void:
+# 화면 밖으로 나가면 삭제 (VisibleOnScreenNotifier2D 시그널 연결)
+func _on_visible_on_screen_notifier_2d_screen_exited():
 	queue_free()
