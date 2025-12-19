@@ -27,7 +27,7 @@ func _ready() -> void:
 	# 목숨 수 초기화
 	current_life = max_life
 	# 시작 위치 초기화, 임의값이라 나중에 수정
-	position = Vector2(1152/2,600)
+	position = Vector2(576,600)
 	
 	# 타이머=연사속도 설정
 	shoot_timer.wait_time = fire_rate
