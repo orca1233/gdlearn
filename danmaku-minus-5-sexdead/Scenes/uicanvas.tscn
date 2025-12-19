@@ -1,0 +1,84 @@
+[gd_scene load_steps=2 format=3 uid="uid://dqmgm5fta65hn"]
+
+[ext_resource type="Script" uid="uid://borrp4pl80gsn" path="res://Scenes/uicanvas.gd" id="1_wcq55"]
+
+[node name="UIcanvas" type="CanvasLayer"]
+script = ExtResource("1_wcq55")
+
+[node name="Score" type="Label" parent="."]
+offset_right = 251.0
+offset_bottom = 23.0
+
+[node name="Life" type="HBoxContainer" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -71.0
+offset_right = 107.05005
+offset_bottom = 42.499996
+grow_horizontal = 0
+scale = Vector2(0.4, 0.4)
+alignment = 2
+
+[node name="score_timer" type="Timer" parent="."]
+wait_time = 0.075
+autostart = true
+
+[node name="Gameoverpanel" type="Panel" parent="."]
+visible = false
+offset_left = 576.0
+offset_top = 324.0
+offset_right = 576.0
+offset_bottom = 324.0
+
+[node name="CenterContainer" type="CenterContainer" parent="Gameoverpanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -143.0
+offset_top = -50.5
+offset_right = 143.0
+offset_bottom = 50.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Gameoverpanel/CenterContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Gameoverpanel/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "GAME OVER"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="Gameoverpanel/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Your "
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Gameoverpanel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -179.0
+offset_top = 281.0
+offset_right = 179.0
+offset_bottom = 324.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_bottom = 15
+
+[node name="Label" type="Label" parent="Gameoverpanel/MarginContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "PRESS Z OR / TO START AGAIN"
+horizontal_alignment = 1
+
+[connection signal="timeout" from="score_timer" to="." method="_on_score_timer_timeout"]

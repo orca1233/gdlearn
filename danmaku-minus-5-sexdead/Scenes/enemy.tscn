@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://co8vgy4b843rn"]
+
+[ext_resource type="Texture2D" uid="uid://dvrg17cibrfs4" path="res://Assets/Portrait/playerShip1_blue.png" id="1_atlr2"]
+[ext_resource type="Script" uid="uid://2fclj5kde7eh" path="res://Scripts/enemy.gd" id="1_e2b7p"]
+[ext_resource type="PackedScene" uid="uid://c5btjhmhi6l4x" path="res://Scenes/enemy_bullet.tscn" id="2_2g0jp"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_e2b7p"]
+radius = 11.045361
+
+[node name="enemy" type="Area2D"]
+position = Vector2(3, 19)
+rotation = 3.1415927
+script = ExtResource("1_e2b7p")
+bullet_scene = ExtResource("2_2g0jp")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1, -8.742278e-08)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_atlr2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1.0000013, 5)
+rotation = 3.1415927
+scale = Vector2(1, -1)
+shape = SubResource("CircleShape2D_e2b7p")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(0.9999988, -19)
+rotation = 3.1415927
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true

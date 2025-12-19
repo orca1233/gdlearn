@@ -2,12 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c08f5n562j4r2"
-valid=false
+uid="uid://cjbg0pju5touh"
+path="res://.godot/imported/icon.svg-97cab421f5f42082b8fe7b810dd8119d.ctex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 
-source_file="res://Assets/Scenes/BG_hakurei_2.png"
+source_file="res://Assets/Portrait/icon.svg"
+dest_files=["res://.godot/imported/icon.svg-97cab421f5f42082b8fe7b810dd8119d.ctex"]
 
 [params]
 
@@ -34,3 +38,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false

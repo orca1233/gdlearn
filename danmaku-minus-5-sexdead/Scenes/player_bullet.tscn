@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://c8lq0v1y8x20"]
+
+[ext_resource type="Script" uid="uid://dlepsv18fshxn" path="res://Scripts/player_bullet.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://bqh1v8dybny2e" path="res://Assets/Danmaku/Shot_01.png" id="2_tex"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3m2mg"]
+atlas = ExtResource("2_tex")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jskx8"]
+radius = 9.055386
+
+[node name="PlayerBullet" type="Area2D"]
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("1_script")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = -1.5708
+scale = Vector2(0.5, 0.5)
+texture = SubResource("AtlasTexture_3m2mg")
+region_enabled = true
+region_rect = Rect2(1224, 712, 48, 48)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_jskx8")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(0, 50)
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
