@@ -12,9 +12,15 @@ extends CharacterBody2D
 @export var bullet_scene: PackedScene = preload("res://Scenes/player_bullet.tscn")
 @export var fire_rate: float = 0.08 # 연사 속도
 
+@export_group("Respawn")
+@export var invincible_time : float = 1.5
+@export var respawn_time : float = 1.0
+@export var respawn_position : Vector2 = Vector2(576,600)
+
 # 플레이어가 가지는 변수
 var current_life: int
 var can_shoot: bool = true
+var is_invincible: bool = false # 무적 상태 확인
 
 @onready var hitbox_sprite = $HitboxSprite
 @onready var shoot_timer = $shoot_timer
@@ -27,7 +33,7 @@ func _ready() -> void:
 	# 목숨 수 초기화
 	current_life = max_life
 	# 시작 위치 초기화, 임의값이라 나중에 수정
-	position = Vector2(576,600)
+	position = respawn_position
 	
 	# 타이머=연사속도 설정
 	shoot_timer.wait_time = fire_rate
@@ -90,17 +96,19 @@ func _on_shoot_timer_timeout() -> void:
 	can_shoot = true
 	
 func _take_damage(damage):
-	# 이미 죽었으면 무시
-
-	if current_life <= 0:
+	# 이미 죽었으면 // 아니면 무적 상태면 무시
+	if current_life <= 0 or is_invincible == true:
 		return
 	current_life -= damage
 
 	# 체력 변화 신호 발신 (UI 업데이트용)
 	life_changed.emit(current_life)
-		
+	
 	if current_life <= 0:
 		game_over()
+		# 리스폰 
+	else:
+		respawn()
 
 func game_over() -> void:
 	# 사망 신호 발신
@@ -111,3 +119,56 @@ func game_over() -> void:
 	
 	# (선택) 플레이어 숨기기 or 폭발 이펙트 재생 등
 	# visible = false
+
+func respawn() -> void:
+	# 1. 조작권 뺏고 / visible 끄고 / invincible 설정
+	set_physics_process(false)
+	visible = false
+	is_invincible = true
+	
+	# 2. 살짝 대기 (1초)
+	await get_tree().create_timer(respawn_time).timeout
+	
+	# 3. 화면 아래쪽에서 등장 준비
+	visible = true
+	# 화면 값 얻어오기
+	var view_rect = get_viewport_rect()
+	# 화면 값 얻어온 것에서 y로 아래로 내리기
+	position = Vector2(respawn_position.x, view_rect.size.y + 100)
+	
+	# 4. 슬라이딩 연출 (Tween 사용)
+		# 1. tween.set_trans(Tween.TRANS_CUBIC)
+		# "변화의 그래프 모양(가속도 곡선)"을 정합니다.
+			# 기본값 (TRANS_LINEAR): 기계처럼 처음부터 끝까지 똑같은 속도로 움직입니다. (밋밋함)
+			# TRANS_CUBIC: 3차 함수($y=x^3$) 곡선을 따릅니다. 속도가 급격하게 변하는 구간이 있어서, 훨씬 부드럽고 자연스러운 느낌을 줍니다.
+		# 2. tween.set_ease(Tween.EASE_OUT)
+		# "곡선의 어느 부분을 쓸 것인가(가속이냐 감속이냐)를 정합니다.
+			#EASE_IN (진입): 천천히 시작해서 점점 빨라집니다. (예: 로켓 발사, 자동차 출발)
+			#EASE_OUT (진출): 빠르게 시작해서 점점 느려집니다. (예: 급브레이크, 슬라이딩)
+			#EASE_IN_OUT: 천천히 시작했다가 중간에 빨라지고, 다시 천천히 멈춥니다.
+	
+	var respawn_tween = create_tween()
+	respawn_tween.set_trans(Tween.TRANS_CUBIC)
+	respawn_tween.set_ease(Tween.EASE_OUT)
+	# tween 써서 position을 respawn_position까지 1.5초동안 옮긴다
+	respawn_tween.tween_property(self, "position", respawn_position, 1.5)
+	
+	await respawn_tween.finished
+	
+	# 5. 조작 가능하게 설정해주기
+	position = respawn_position
+	visible = true
+	set_physics_process(true)
+	
+	# 4.5. 무적시간 주기
+	var blink_tween = create_tween()
+	blink_tween.set_loops() # 무한 반복 설정
+	blink_tween.tween_property(self, "modulate:a", 0.5, 0.1) # 반투명
+	blink_tween.tween_property(self, "modulate:a", 1.0, 0.1) # 불투명
+	await get_tree().create_timer(invincible_time).timeout # 1.5초 끝날 때까지 대기
+	
+	# 5. 무적 해제
+	if blink_tween:
+		blink_tween.kill() # blink tween 있으면 죽이고 / alpha 값 1.0으로 만들기
+		modulate.a = 1.0
+	is_invincible = false # 그 후에 무적 해제
