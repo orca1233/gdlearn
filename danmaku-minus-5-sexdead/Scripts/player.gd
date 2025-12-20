@@ -31,7 +31,6 @@ func _ready() -> void:
 	
 	# 타이머=연사속도 설정
 	shoot_timer.wait_time = fire_rate
-	
 	# 꽉찬 하트 그릴 수 있게 신호 발신
 	life_changed.emit(current_life)
 
@@ -66,11 +65,6 @@ func _physics_process(_delta: float) -> void:
 	# Z키 또는 /키 (WASD 조작은 / , 화살표 조작은 z)
 	if Input.is_action_pressed("attack"):
 		shoot()
-	
-	# 3. 디버깅용 라이프 줄이기
-	if Input.is_action_just_pressed("debugkey"):
-		_take_damage()
-		print("라이프 마이너스")
 
 # 총알 쏘는(소환하는) 로직
 	# level에서 안 하는 이유 -> 스테이지 많이 만들건데 그때마다 총알 로직 level에서 구현해주기 귀찮아서 플레이어에 박음
@@ -95,16 +89,16 @@ func shoot() -> void:
 func _on_shoot_timer_timeout() -> void:
 	can_shoot = true
 	
-func _take_damage(damage: int = 1) -> void:
+func _take_damage(damage):
 	# 이미 죽었으면 무시
+
 	if current_life <= 0:
 		return
-
 	current_life -= damage
-	
+
 	# 체력 변화 신호 발신 (UI 업데이트용)
 	life_changed.emit(current_life)
-	
+		
 	if current_life <= 0:
 		game_over()
 
