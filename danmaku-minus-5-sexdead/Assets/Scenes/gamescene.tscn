@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://cxeldxtudj6tm"]
+[gd_scene load_steps=5 format=3 uid="uid://cxeldxtudj6tm"]
 
 [ext_resource type="PackedScene" uid="uid://bkt3kddvmrluk" path="res://Assets/Scenes/player.tscn" id="1_0jfkj"]
 [ext_resource type="Texture2D" uid="uid://cdlmovu675luv" path="res://Assets/BG/BG_forest.png" id="1_pk0u0"]
+[ext_resource type="PackedScene" uid="uid://bbka7ag0x2ol5" path="res://Assets/Scenes/enemypath.tscn" id="3_pvnhp"]
+[ext_resource type="Script" uid="uid://dnt2no7201hnm" path="res://Assets/Scripts/enemy_spawner.gd" id="4_21bxy"]
 
 [node name="Gamescene" type="Node2D"]
 
@@ -24,6 +26,10 @@ texture = ExtResource("1_pk0u0")
 
 [node name="Player" parent="Gameplaycontainer" instance=ExtResource("1_0jfkj")]
 position = Vector2(576, 600)
+
+[node name="EnemySpawner" type="Node2D" parent="Gameplaycontainer"]
+script = ExtResource("4_21bxy")
+enemy_path_scene = ExtResource("3_pvnhp")
 
 [node name="UIcanvas" type="CanvasLayer" parent="."]
 
