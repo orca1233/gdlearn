@@ -11,7 +11,7 @@ radius = 11.045361
 position = Vector2(3, 19)
 rotation = 3.1415927
 collision_layer = 8
-collision_mask = 2
+collision_mask = 3
 script = ExtResource("1_e2b7p")
 bullet_scene = ExtResource("2_2g0jp")
 shoot_interval = 0.2
@@ -33,3 +33,5 @@ rotation = 3.1415927
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
