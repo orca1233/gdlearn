@@ -1,9 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://dutyyeeuad76i"]
+[gd_scene load_steps=3 format=3 uid="uid://dutyyeeuad76i"]
 
 [ext_resource type="PackedScene" uid="uid://07jk8mvg2bqc" path="res://Scenes/boss_1.tscn" id="1_xxdi8"]
+[ext_resource type="PackedScene" uid="uid://bkt3kddvmrluk" path="res://Scenes/player.tscn" id="2_6ypu8"]
 
 [node name="Boss1Room" type="Node2D"]
 
 [node name="boss1" parent="." instance=ExtResource("1_xxdi8")]
-position = Vector2(419, 360)
-alpha = 0.616
+position = Vector2(575, 407)
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("2_6ypu8")]

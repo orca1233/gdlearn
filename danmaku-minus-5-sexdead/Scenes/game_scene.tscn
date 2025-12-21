@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://cxeldxtudj6tm"]
 
 [ext_resource type="PackedScene" uid="uid://bkt3kddvmrluk" path="res://Scenes/player.tscn" id="1_0jfkj"]
-[ext_resource type="Script" path="res://Scenes/game_scene.gd" id="1_fiftr"]
+[ext_resource type="Script" uid="uid://d3l187y02v8cc" path="res://Scenes/game_scene.gd" id="1_fiftr"]
 [ext_resource type="Texture2D" uid="uid://cdlmovu675luv" path="res://Assets/BG/BG_forest.png" id="1_pk0u0"]
 [ext_resource type="PackedScene" uid="uid://dqmgm5fta65hn" path="res://Scenes/uicanvas.tscn" id="3_6h5vk"]
 [ext_resource type="Script" uid="uid://dnt2no7201hnm" path="res://Scripts/enemy_spawner.gd" id="4_rgj8m"]
