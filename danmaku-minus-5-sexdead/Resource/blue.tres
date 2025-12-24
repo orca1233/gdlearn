@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bqh1v8dybny2e" path="res://Assets/Danmaku/Shot_01.png" id="2_5v16k"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kqmel"]
-radius = 16.0
+radius = 8.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w5r11"]
 atlas = ExtResource("2_5v16k")
@@ -14,7 +14,7 @@ region = Rect2(176, 192, 16, 16)
 script = ExtResource("1_qdrna")
 texture = SubResource("AtlasTexture_w5r11")
 collision_shape = SubResource("CircleShape2D_kqmel")
-speed = 170.0
+speed = 200.0
 fire_rate = 0.01
 bullet_count = 20
 spread_angle = 70.0

@@ -8,7 +8,6 @@ var shoot_timer = 0.0
 @export var max_life = 1
 @onready var current_life = max_life
 
-
 signal enemy_died
 
 func _process(delta):

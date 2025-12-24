@@ -9,20 +9,23 @@ atlas = ExtResource("3_38rej")
 region = Rect2(1224.2388, 200.45462, 47.947266, 47.341995)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_38rej"]
+radius = 5.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6t5aa"]
 atlas = ExtResource("3_38rej")
 region = Rect2(1280, 704, 64, 64)
 
 [node name="CharacterBody2D" type="CharacterBody2D" groups=["player"]]
+collision_mask = 32776
 script = ExtResource("2_7dd06")
+focus_speed = 70.0
 
 [node name="PlayerSprite" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_6cd4h")
 
 [node name="HitboxSprite" type="Sprite2D" parent="."]
-scale = Vector2(0.5, 0.5)
+scale = Vector2(0.25, 0.25)
 texture = SubResource("AtlasTexture_t1xgp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

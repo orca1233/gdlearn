@@ -16,7 +16,9 @@ region = Rect2(1.3622208, 259.91193, 125.71313, 122.352844)
 [sub_resource type="CircleShape2D" id="CircleShape2D_b3vv7"]
 radius = 54.230988
 
-[node name="boss1" type="CharacterBody2D"]
+[node name="boss1" type="Area2D"]
+collision_layer = 8
+collision_mask = 3
 script = ExtResource("1_a8swx")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -46,4 +48,4 @@ script = ExtResource("4_q8p7u")
 bullet_node = ExtResource("2_f666b")
 patterns = Array[ExtResource("5_y0rh1")]([ExtResource("8_n1ip5")])
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

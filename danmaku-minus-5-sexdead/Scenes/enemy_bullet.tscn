@@ -1,23 +1,21 @@
-[gd_scene load_steps=2 format=3 uid="uid://c5btjhmhi6l4x"]
+[gd_scene load_steps=3 format=3 uid="uid://c5btjhmhi6l4x"]
 
 [ext_resource type="Script" uid="uid://l448d8cq82mq" path="res://Scripts/enemy_bullet.gd" id="1_xigdn"]
 
-[ext_resource type="Texture2D" uid="uid://bqh1v8dybny2e" path="res://Assets/Danmaku/Shot_01.png" id="2_4wrx5"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_dn54t"]
-radius = 6.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tcvu8"]
 
 [node name="EnemyBullet" type="Area2D"]
-collision_layer = 32768
-script = ExtResource("1_xigdn")
 z_index = 100
 z_as_relative = false
+collision_layer = 32768
+script = ExtResource("1_xigdn")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 100
 region_rect = Rect2(1224, 904, 48, 48)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_tcvu8")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 

@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bqh1v8dybny2e" path="res://Assets/Danmaku/Shot_01.png" id="2_ra88g"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ygay2"]
-size = Vector2(32, 29)
+size = Vector2(24, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w5r11"]
 atlas = ExtResource("2_ra88g")

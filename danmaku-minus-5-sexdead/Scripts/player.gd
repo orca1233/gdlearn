@@ -125,16 +125,16 @@ func respawn() -> void:
 	visible = false
 	is_invincible = true
 	
+	var view_rect = get_viewport_rect()
+	position = Vector2(respawn_position.x, view_rect.size.y + 100)
 	# 2. 살짝 대기 (1초)
 	await get_tree().create_timer(respawn_time).timeout
 	
 	# 3. 화면 아래쪽에서 등장 준비
 	visible = true
 	# 화면 값 얻어오기
-	var view_rect = get_viewport_rect()
-	# 화면 값 얻어온 것에서 y로 아래로 내리기
-	position = Vector2(respawn_position.x, view_rect.size.y + 100)
 	
+	# 화면 값 얻어온 것에서 y로 아래로 내리기
 	# 4. 슬라이딩 연출 (Tween 사용)
 		# 1. tween.set_trans(Tween.TRANS_CUBIC)
 		# "변화의 그래프 모양(가속도 곡선)"을 정합니다.
