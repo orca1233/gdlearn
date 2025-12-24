@@ -15,6 +15,10 @@ run/main_scene="uid://cxeldxtudj6tm"
 config/features=PackedStringArray("4.5", "Mobile")
 config/icon="res://Boss/icon.svg"
 
+[autoload]
+
+vfx_manager="*res://Scripts/vfx_manager.gd"
+
 [input]
 
 left={
@@ -58,7 +62,9 @@ debugkey={
 ]
 }
 
-[rendering]
+[layer_names]
 
-renderer/rendering_method="gl_compatibility"
-renderer/rendering_method.mobile="gl_compatibility"
+2d_physics/layer_1="플레이어"
+2d_physics/layer_2="플레이어 총알"
+2d_physics/layer_4="적 본체"
+2d_physics/layer_16="적 총알"

@@ -2,10 +2,16 @@
 
 [ext_resource type="Script" uid="uid://l448d8cq82mq" path="res://Scripts/enemy_bullet.gd" id="1_xigdn"]
 
+[ext_resource type="Texture2D" uid="uid://bqh1v8dybny2e" path="res://Assets/Danmaku/Shot_01.png" id="2_4wrx5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dn54t"]
+radius = 6.0
+
 [node name="EnemyBullet" type="Area2D"]
+collision_layer = 32768
+script = ExtResource("1_xigdn")
 z_index = 100
 z_as_relative = false
-script = ExtResource("1_xigdn")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 100
@@ -14,3 +20,6 @@ region_rect = Rect2(1224, 904, 48, 48)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

@@ -1,40 +1,22 @@
-[gd_scene load_steps=7 format=3 uid="uid://cxeldxtudj6tm"]
+[gd_scene load_steps=5 format=3 uid="uid://cxeldxtudj6tm"]
 
-[ext_resource type="PackedScene" uid="uid://bkt3kddvmrluk" path="res://Scenes/player.tscn" id="1_0jfkj"]
-[ext_resource type="Script" uid="uid://d3l187y02v8cc" path="res://Scenes/game_scene.gd" id="1_fiftr"]
-[ext_resource type="Texture2D" uid="uid://cdlmovu675luv" path="res://Assets/BG/BG_forest.png" id="1_pk0u0"]
-[ext_resource type="PackedScene" uid="uid://dqmgm5fta65hn" path="res://Scenes/uicanvas.tscn" id="3_6h5vk"]
-[ext_resource type="Script" uid="uid://dnt2no7201hnm" path="res://Scripts/enemy_spawner.gd" id="4_rgj8m"]
-[ext_resource type="PackedScene" uid="uid://bbka7ag0x2ol5" path="res://Scenes/enemypath.tscn" id="5_2fmhe"]
+[ext_resource type="Script" uid="uid://d3l187y02v8cc" path="res://Scripts/game_scene.gd" id="1_fiftr"]
+[ext_resource type="PackedScene" uid="uid://7yn6afyqhvr5" path="res://Scenes/parrallax_2d.tscn" id="2_fiftr"]
+[ext_resource type="PackedScene" uid="uid://b3lv2cgck0rfu" path="res://Scenes/gameplay_container.tscn" id="3_1ixah"]
+[ext_resource type="PackedScene" uid="uid://dqmgm5fta65hn" path="res://Scenes/ui_canvas.tscn" id="3_6h5vk"]
 
 [node name="Gamescene" type="Node2D"]
 script = ExtResource("1_fiftr")
+stage_duration = 50
 
-[node name="Parrallax2D" type="Parallax2D" parent="."]
-texture_filter = 1
-repeat_size = Vector2(0, 2067.555)
-autoscroll = Vector2(0, 100)
+[node name="Parrallax2D" parent="." instance=ExtResource("2_fiftr")]
 
-[node name="Sprite2D" type="Sprite2D" parent="Parrallax2D"]
-texture_filter = 1
-position = Vector2(576, 0)
-scale = Vector2(3.1, 3.1)
-texture = ExtResource("1_pk0u0")
-
-[node name="Gameplaycontainer" type="Node2D" parent="."]
-
-[node name="Bulletcontainer" type="Node2D" parent="Gameplaycontainer"]
-
-[node name="Player" parent="Gameplaycontainer" instance=ExtResource("1_0jfkj")]
-position = Vector2(576, 600)
-
-[node name="Enemycontainer" type="Node2D" parent="Gameplaycontainer"]
-
-[node name="EnemySpawner" type="Node2D" parent="Gameplaycontainer"]
-script = ExtResource("4_rgj8m")
-enemy_path_scene = ExtResource("5_2fmhe")
+[node name="Gameplaycontainer" parent="." instance=ExtResource("3_1ixah")]
 
 [node name="UIcanvas" parent="." instance=ExtResource("3_6h5vk")]
 
-[connection signal="life_changed" from="Gameplaycontainer/Player" to="." method="_on_player_life_changed"]
-[connection signal="player_died" from="Gameplaycontainer/Player" to="." method="_on_player_player_died"]
+[node name="StageTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[connection signal="timeout" from="StageTimer" to="." method="_on_stage_timer_timeout"]
