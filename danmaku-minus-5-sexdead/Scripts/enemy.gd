@@ -49,7 +49,9 @@ func _take_damage(damage):
 	current_life -= damage
 	if current_life <= 0:
 		_object_died()
-		queue_free()
+		
 		
 func _object_died():
 	enemy_died.emit()
+	vfx_manager.spawn_explosion(global_position)
+	queue_free()

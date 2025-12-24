@@ -103,6 +103,8 @@ func _take_damage(damage):
 
 	# 체력 변화 신호 발신 (UI 업데이트용)
 	life_changed.emit(current_life)
+	# 폭발 이펙트 재생
+	vfx_manager.spawn_explosion(global_position)
 	
 	if current_life <= 0:
 		game_over()
@@ -116,9 +118,6 @@ func game_over() -> void:
 	
 	# 조작권 뺏기
 	set_physics_process(false)
-	
-	# (선택) 플레이어 숨기기 or 폭발 이펙트 재생 등
-	# visible = false
 
 func respawn() -> void:
 	# 1. 조작권 뺏고 / visible 끄고 / invincible 설정
