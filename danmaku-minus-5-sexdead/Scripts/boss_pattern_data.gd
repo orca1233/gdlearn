@@ -8,6 +8,7 @@ enum ShootType { SPIRAL, SPREAD, CIRCLE_BURST }
 @export var pattern_type: ShootType = ShootType.SPIRAL
 @export var texture: Texture2D
 @export var collision_shape: Shape2D
+@export var sprite_rotation: float = 0.0
 
 @export_group("Movement")
 @export var speed: float = 300.0
@@ -25,3 +26,8 @@ enum ShootType { SPIRAL, SPREAD, CIRCLE_BURST }
 
 @export_group("Position")
 @export var spawn_offset: Vector2 = Vector2.ZERO # 보스 기준 생성 위치 (예: 오른쪽은 50, 0)
+
+@export_group("Burst Settings")
+@export var burst_time: float = 3.0 # 몇 초 동안 발사
+@export var rest_time: float = 2.0  # 몇 초 동안 휴식
+@export var use_burst: bool = false # 이 기능을 쓸지 말지 결정
