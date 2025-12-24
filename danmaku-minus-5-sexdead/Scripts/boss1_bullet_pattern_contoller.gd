@@ -1,3 +1,4 @@
+# boss1_bullet_pattern_contoller.gd
 extends Node2D
 class_name PatternController
 
@@ -17,32 +18,55 @@ func _ready():
 func load_pattern(index: int):
 	if index >= patterns.size(): return
 	current_index = index
-	var data = patterns[current_index]
-	timer.wait_time = data.fire_rate
+	timer.wait_time = patterns[current_index].fire_rate
 	timer.start()
-
-func next_pattern():
-	current_index += 1
-	if current_index < patterns.size():
-		load_pattern(current_index)
-	else:
-		timer.stop()
 
 func _on_timer_timeout():
 	var data = patterns[current_index]
-	# theta는 매 발사 시 rotate_speed만큼 누적되어 회전함
-	theta += data.rotate_speed
-	shoot(theta, data)
+	
+	# 1. 기준 각도 결정
+	var base_angle = theta # 기본은 누적된 회전각
+	if data.is_aimed:
+		# 플레이어 방향을 기준 각도로 사용
+		var players = get_tree().get_nodes_in_group("player")
+		if players.size() > 0:
+			var spawn_pos = global_position + data.spawn_offset.rotated(rotation)
+			base_angle = (players[0].global_position - spawn_pos).angle()
+	
+	# 2. 패턴 타입별 발사 로직
+	match data.pattern_type:
+		data.ShootType.SPIRAL:
+			theta += data.rotate_speed
+			shoot(base_angle + theta, data)
+			
+		data.ShootType.SPREAD:
+			# 기준 각도(base_angle)를 중심으로 부채꼴 발사
+			var start_angle = base_angle - deg_to_rad(data.spread_angle) / 2
+			var angle_step = 0.0
+			if data.bullet_count > 1:
+				angle_step = deg_to_rad(data.spread_angle) / (data.bullet_count - 1)
+				
+			for i in range(data.bullet_count):
+				var angle = start_angle + (angle_step * i)
+				shoot(angle, data)
+				
+		data.ShootType.CIRCLE_BURST:
+			for i in range(data.bullet_count):
+				var angle = (PI * 2 / data.bullet_count) * i
+				shoot(base_angle + angle, data)
 
 func shoot(angle: float, data: BulletPatternData):
 	var bullet = bullet_node.instantiate()
-
-	# 1. 먼저 씬에 추가 (이렇게 해야 Bullet의 _ready가 실행될 준비를 함)
 	get_tree().current_scene.add_child(bullet)
 
-	# 2. 그 다음 위치와 데이터를 설정
-	bullet.global_position = self.global_position
+	# 생성 위치에 Resource에서 정한 offset 적용
+	bullet.global_position = self.global_position + data.spawn_offset.rotated(self.rotation)
+	
+	# 산탄용: 총알마다 속도를 다르게 설정
+	var final_speed = data.speed + randf_range(-data.speed_variance, data.speed_variance)
+	
 	var dir = Vector2.RIGHT.rotated(angle + data.alpha)
-
+	
 	if bullet.has_method("setup"):
 		bullet.setup(data, dir)
+		bullet.speed = final_speed # setup 이후에 개별 속도 덮어쓰기
