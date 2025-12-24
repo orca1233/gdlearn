@@ -50,7 +50,6 @@ func _take_damage(damage):
 	if current_life <= 0:
 		_object_died()
 		
-		
 func _object_died():
 	enemy_died.emit()
 	vfx_manager.spawn_explosion(global_position)
