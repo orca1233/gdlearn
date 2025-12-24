@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://7yn6afyqhvr5"]
+
+[ext_resource type="Texture2D" uid="uid://cdlmovu675luv" path="res://Assets/BG/BG_forest.png" id="1_u6wnr"]
+
+[node name="Parrallax2D" type="Parallax2D"]
+texture_filter = 1
+repeat_size = Vector2(0, 2067.555)
+autoscroll = Vector2(0, 100)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(576, 0)
+scale = Vector2(3.1, 3.1)
+texture = ExtResource("1_u6wnr")

@@ -1,17 +1,22 @@
+# enemy_bullet.gd
 extends Area2D
 
-var direction = Vector2.ZERO
-@export var speed = 400.0
+var direction: Vector2 = Vector2.ZERO
+var speed: float = 0.0
 
-func set_direction(dir: Vector2):
-	direction = dir
-	# 총알 이미지의 방향을 이동 방향에 맞게 회전 (선택 사항)
-	rotation = dir.angle()
+func setup(data: BulletPatternData, dir: Vector2, custom_speed: float):
+	# 데이터에서 텍스처와 충돌 영역 설정
+	if has_node("Sprite2D"): $Sprite2D.texture = data.texture
+	if has_node("CollisionShape2D"): $CollisionShape2D.shape = data.collision_shape
+	
+	# 이동 관련 설정
+	self.direction = dir
+	self.speed = custom_speed
+	self.rotation = dir.angle() + deg_to_rad(data.sprite_rotation)
+	
 
 func _process(delta):
-	print("내 방향은: ", direction)
 	position += direction * speed * delta
 
-# 화면 밖으로 나가면 삭제 (VisibleOnScreenNotifier2D 시그널 연결)
 func _on_visible_on_screen_notifier_2d_screen_exited():
 	queue_free()
