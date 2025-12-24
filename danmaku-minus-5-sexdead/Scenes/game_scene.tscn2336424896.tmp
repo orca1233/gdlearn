@@ -27,7 +27,6 @@ texture = ExtResource("1_pk0u0")
 
 [node name="Player" parent="Gameplaycontainer" instance=ExtResource("1_0jfkj")]
 position = Vector2(576, 600)
-collision_mask = 32776
 
 [node name="Enemycontainer" type="Node2D" parent="Gameplaycontainer"]
 

@@ -4,7 +4,8 @@ extends CanvasLayer
 @onready var score_timer = $score_timer
 var lifeimage = load("res://Assets/Portrait/icon.svg")
 var time_elapsed : int
-var score : int
+var kill_score : int
+var total_score : int
 
 func _on_player_life_changed(new_life: int) -> void:
 	# 1. 기존에 그려진 하트들을 모두 삭제
@@ -35,8 +36,18 @@ func _input(event):
 			$Gameoverpanel.visible = false
 			get_tree().reload_current_scene()
 
-# 점수 타이머
+# 스코어 판 갱신해주는 함수
+func _update_score_display() -> void:
+	# 시간 점수 + 처치 점수
+	total_score = (time_elapsed * 1000) + kill_score
+	$Score.text = "Score : " + str(total_score)
+
+# 1초마다 실행되는 타이머
 func _on_score_timer_timeout() -> void:
 	time_elapsed += 1
-	score = time_elapsed * 1000 
-	$Score.text = "Score : " + str(score)
+	_update_score_display() # 시간 늘었으니 점수 갱신
+
+# 적이 죽었을 때 실행되는 함수
+func _on_object_died() -> void:
+	kill_score += 100000 # 적 점수 저장소에 추가
+	_update_score_display() # 적 죽었으니 점수 갱신

@@ -3,6 +3,8 @@ extends Node2D
 # 1. 아까 만든 'EnemyPath.tscn' 파일을 인스펙터에서 드래그해서 넣어주세요
 @export var enemy_path_scene: PackedScene 
 
+signal enemy_spawned(enemy_instance)
+
 func _ready():
 	# 게임 시작 1초 뒤에 공격 시작
 	await get_tree().create_timer(1.0).timeout
@@ -26,6 +28,10 @@ func spawn_enemy(is_right: bool):
 	var path_inst = enemy_path_scene.instantiate()
 	# 메인 씬에 추가하여 전체 화면 좌표계를 사용합니다.
 	get_tree().current_scene.add_child(path_inst)
+	
+	# 적 소환했다는 신호 보내기
+	var enemy = path_inst.get_node("PathFollow2D/enemy")
+	enemy_spawned.emit(enemy)
 	
 	var screen_width = get_viewport_rect().size.x
 	

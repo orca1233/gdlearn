@@ -1,9 +1,15 @@
 extends Area2D
 
 @export var bullet_scene: PackedScene # 에디터에서 Bullet.tscn을 드래그 앤 드롭
+@export var damage : int = 1
 var can_shoot = false
 var shoot_timer = 0.0
 @export var shoot_interval = 0.04 # 발사 간격
+@export var max_life = 1
+@onready var current_life = max_life
+
+
+signal enemy_died
 
 func _process(delta):
 	var progress = get_parent().progress_ratio
@@ -32,3 +38,18 @@ func shoot_at_player():
 	var player = get_tree().get_first_node_in_group("player")
 	if player:
 		b.direction = (player.global_position - global_position).normalized()
+
+func _on_body_entered(body: Node2D) -> void:
+	## 적이 CharacterBody2D면 이거 쓰고
+	if body.has_method("_take_damage"):
+		body._take_damage(damage)
+
+# 보스한테도 적용 가능하게
+func _take_damage(damage):
+	current_life -= damage
+	if current_life <= 0:
+		_object_died()
+		queue_free()
+		
+func _object_died():
+	enemy_died.emit()
