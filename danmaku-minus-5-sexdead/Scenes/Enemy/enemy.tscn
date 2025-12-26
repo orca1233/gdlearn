@@ -7,7 +7,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_e2b7p"]
 radius = 11.045361
 
-[node name="enemy" type="Area2D"]
+[node name="enemy" type="Area2D" groups=["enemy"]]
 position = Vector2(3, 19)
 rotation = 3.1415927
 collision_layer = 8

@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://bkt3kddvmrluk"]
+[gd_scene load_steps=8 format=3 uid="uid://bkt3kddvmrluk"]
 
 [ext_resource type="Texture2D" uid="uid://dvrg17cibrfs4" path="res://Assets/Portrait/playerShip1_blue.png" id="1_6cd4h"]
 [ext_resource type="Script" uid="uid://bx6f0pra6xw6p" path="res://Scripts/player.gd" id="2_7dd06"]
+[ext_resource type="PackedScene" uid="uid://bssyyusvg1o3f" path="res://Scenes/bomb.tscn" id="2_vgqql"]
 [ext_resource type="Texture2D" uid="uid://bqh1v8dybny2e" path="res://Assets/Danmaku/Shot_01.png" id="3_38rej"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t1xgp"]
@@ -19,6 +20,7 @@ region = Rect2(1280, 704, 64, 64)
 collision_mask = 32776
 script = ExtResource("2_7dd06")
 focus_speed = 70.0
+bomb_scene = ExtResource("2_vgqql")
 
 [node name="PlayerSprite" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 0.5)

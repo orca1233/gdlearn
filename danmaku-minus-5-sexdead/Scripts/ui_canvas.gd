@@ -3,22 +3,66 @@ extends CanvasLayer
 # 더 좋은 이미지 있으면 변경
 @onready var score_timer = $score_timer
 var lifeimage = load("res://Assets/Portrait/icon.svg")
+# 폭탄 아이콘은 일단 같은거 쓰거나, 색만 다르게 해서 쓰세요. 나중에 변경 가능.
+var bombimage = load("res://Assets/Portrait/icon.svg") 
+
 var time_elapsed : int
 var kill_score : int
 var total_score : int
 
+func _ready() -> void:
+
+	# Life 컨테이너 설정 (우측 상단 고정)
+	if has_node("Life"):
+		var life = $Life
+		# 1. 앵커를 우측 상단'으로 강제 설정
+		life.set_anchors_preset(Control.PRESET_TOP_RIGHT)
+		# 2. 성장 방향 왼쪽으로
+		life.grow_horizontal = Control.GROW_DIRECTION_BEGIN
+		# 3. 정렬: 오른쪽 끝
+		life.alignment = BoxContainer.ALIGNMENT_END
+		
+	# Bomb 컨테이너 설정 (우측 하단 고정)
+	if has_node("Bomb"):
+		var bomb = $Bomb
+		# 1. 앵커를 '우측 하단'으로
+		bomb.set_anchors_preset(Control.PRESET_BOTTOM_RIGHT)
+		# 2. 성장 방향
+		bomb.grow_horizontal = Control.GROW_DIRECTION_BEGIN
+		# 3. 정렬
+		bomb.alignment = BoxContainer.ALIGNMENT_END
+
 func _on_player_life_changed(new_life: int) -> void:
 	# 1. 기존에 그려진 하트들을 모두 삭제
-	for child in $Life.get_children():
-		child.queue_free()
-	
-	# 2. 현재 체력만큼 하트를 새로 그림
-	for i in range(new_life):
-		var text_rect = TextureRect.new()
-		text_rect.texture = lifeimage
-		# 이미지 비율 유지 설정
-		text_rect.stretch_mode = TextureRect.STRETCH_KEEP
-		$Life.add_child(text_rect)
+	if has_node("Life"):
+		for child in $Life.get_children():
+			child.queue_free()
+		
+		# 2. 현재 체력만큼 하트를 새로 그림
+		for i in range(new_life):
+			var text_rect = TextureRect.new()
+			text_rect.texture = lifeimage
+			text_rect.stretch_mode = TextureRect.STRETCH_KEEP
+			# 크기 조절 필요하면 여기서
+			text_rect.custom_minimum_size = Vector2(32, 32) 
+			text_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+			$Life.add_child(text_rect)
+
+# 폭탄 UI 업데이트 (Life와 같은 방식)
+func _on_player_bomb_changed(new_bomb: int) -> void:
+	# Bomb 컨테이너가 씬에 있어야 합니다! (HBoxContainer 추천)
+	if has_node("Bomb"): 
+		for child in $Bomb.get_children():
+			child.queue_free()
+			
+		for i in range(new_bomb):
+			var text_rect = TextureRect.new()
+			text_rect.texture = bombimage # 폭탄 이미지
+			text_rect.stretch_mode = TextureRect.STRETCH_KEEP
+			text_rect.modulate = Color(0, 1, 0) # 구분 위해 초록색 틴트 적용 (이미지 있으면 빼세요)
+			text_rect.custom_minimum_size = Vector2(32, 32)
+			text_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+			$Bomb.add_child(text_rect)
 
 # 죽으면 게임오버씬 띄우기
 func _on_player_died() -> void:

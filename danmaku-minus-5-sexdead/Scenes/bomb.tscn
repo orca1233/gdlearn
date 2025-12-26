@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://bssyyusvg1o3f"]
+
+[ext_resource type="Script" uid="uid://i72uyhtd7fi8" path="res://Scripts/bomb.gd" id="1_kdyat"]
+[ext_resource type="Texture2D" uid="uid://bqh1v8dybny2e" path="res://Assets/Danmaku/Shot_01.png" id="1_yx723"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kdyat"]
+radius = 32.06244
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2fiif"]
+atlas = ExtResource("1_yx723")
+region = Rect2(1152, 128, 64, 64)
+
+[node name="Bomb" type="Area2D"]
+collision_mask = 32776
+script = ExtResource("1_kdyat")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_kdyat")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_2fiif")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

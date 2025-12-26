@@ -18,9 +18,14 @@ func _ready() -> void:
 	if player and ui_canvas:
 		# life 변한 것 uicanvas한테 알려줄 수 있게 connect
 		player.life_changed.connect(ui_canvas._on_player_life_changed)
+		
+		# 폭탄 변한 것 uicanvas한테 알려줄 수 있게 connect (추가됨)
+		player.bomb_changed.connect(ui_canvas._on_player_bomb_changed)
+
 		# Player의 _ready()가 GameScene보다 먼저 실행되면 current life 발신을 놓칠 수도 있어서
 		# 귀찮지만 한번 더 수동 갱신
 		ui_canvas._on_player_life_changed(player.current_life)
+		ui_canvas._on_player_bomb_changed(player.current_bomb)
 
 		# 사망 연결용
 		player.player_died.connect(ui_canvas._on_player_died)
@@ -36,4 +41,3 @@ func _on_stage_timer_timeout() -> void:
 	var background_tween = create_tween()
 	# tween 써서 position을 respawn_position까지 1.5초동안 옮긴다
 	background_tween.tween_property(background, "autoscroll", Vector2.ZERO, 0.45)
-	

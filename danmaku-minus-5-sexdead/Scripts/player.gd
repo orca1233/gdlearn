@@ -12,6 +12,12 @@ extends CharacterBody2D
 @export var bullet_scene: PackedScene = preload("res://Scenes/player_bullet.tscn")
 @export var fire_rate: float = 0.08 # 연사 속도
 
+@export_group("Bomb")
+@export var max_bomb: int = 3
+@export var bomb_scene: PackedScene # 폭탄 씬 (Bomb.tscn)을 여기에 할당해야 함
+var current_bomb: int
+var is_bombing: bool = false # 현재 폭탄 사용 중인지
+
 @export_group("Respawn")
 @export var invincible_time : float = 1.5
 @export var respawn_time : float = 1.0
@@ -25,20 +31,26 @@ var is_invincible: bool = false # 무적 상태 확인
 @onready var hitbox_sprite = $HitboxSprite
 @onready var shoot_timer = $shoot_timer
 
-# 플레이어가 쏘는 시그널(데미지 입었다 / 죽었다)
+# 플레이어가 쏘는 시그널
 signal life_changed(new_life: int)
+signal bomb_changed(new_bomb: int) # 폭탄 개수 변화 신호 추가
 signal player_died
 
 func _ready() -> void:
 	# 목숨 수 초기화
 	current_life = max_life
+	# 폭탄 수 초기화
+	current_bomb = max_bomb
+	
 	# 시작 위치 초기화, 임의값이라 나중에 수정
 	position = respawn_position
 	
 	# 타이머=연사속도 설정
 	shoot_timer.wait_time = fire_rate
-	# 꽉찬 하트 그릴 수 있게 신호 발신
+	
+	# UI 초기화를 위해 신호 발신
 	life_changed.emit(current_life)
+	bomb_changed.emit(current_bomb)
 
 
 # 충돌이나 slide 어쩌고 할때는 _physics process 쓰는게 좋다는 글을 봄
@@ -59,8 +71,6 @@ func _physics_process(_delta: float) -> void:
 	move_and_slide()
 	
 	# 화면 밖으로 나가지 않게 제한하기 위해 clamp 사용
-	# clamp(a,b,c) = 특정 값 a가 b, c 사이의 값만 반환하도록 고정하는 것
-		# 즉 여기서는 x, y가 16 ~ 1152-16, 648-16 사이에서만 움직일 수 있게 됨
 	var view_rect = get_viewport_rect()
 	# 플레이어 크기 고려하여 여백 둠
 	var padding = 16.0
@@ -71,9 +81,46 @@ func _physics_process(_delta: float) -> void:
 	# Z키 또는 /키 (WASD 조작은 / , 화살표 조작은 z)
 	if Input.is_action_pressed("attack"):
 		shoot()
+	
+	# 폭탄
+	if Input.is_action_just_pressed("bomb"):
+		use_bomb()
 
-# 총알 쏘는(소환하는) 로직
-	# level에서 안 하는 이유 -> 스테이지 많이 만들건데 그때마다 총알 로직 level에서 구현해주기 귀찮아서 플레이어에 박음
+# 폭탄 사용 로직
+func use_bomb() -> void:
+	# 폭탄 없거나, 사용중이거나, 죽은 상태일 경우 예외처리
+	if current_bomb <= 0 or is_bombing or current_life <= 0:
+		return
+	
+	# bomb 씬 안넣었을 때 대비
+	if bomb_scene == null:
+		print("bomb 씬 안넣음")
+		return
+
+	# 개수 차감
+	current_bomb -= 1
+	# UI 캔버스 갱신용 신호
+	bomb_changed.emit(current_bomb)
+	# 사용중에는 또 사용 못하게
+	is_bombing = true
+	
+	# 폭탄 소환
+	var bomb = bomb_scene.instantiate()
+	# 플레이어 중심 위치에서 발동
+	bomb.global_position = global_position
+	get_parent().add_child(bomb)
+	
+	# 무적 시간 부여 (폭탄 위기 탈출용) - 필요 시 조정
+	is_invincible = true
+	
+	# 폭탄 쿨타임/지속시간. await로 2초동안 기다려줌 (필요시 조정 가능)
+	await get_tree().create_timer(2.0).timeout
+	
+	# 기다려준 후에 무적이랑 쿨타임 제거
+	is_bombing = false
+	is_invincible = false
+
+# 총알 쏘는 로직
 func shoot() -> void:
 	if not can_shoot or not bullet_scene:
 		return
@@ -83,7 +130,6 @@ func shoot() -> void:
 	# 총알은 플레이어 앞 marker 위치에서 소환
 	bullet.position = $BulletPos.global_position
 	# 총알을 불렛컨테이너에 추가
-		# 를 위해서 Player의 부모인 Gameplaycontainer의 node인 bulletcontainer를 가져옴
 	var bullet_container = get_parent().get_node("Bulletcontainer")
 	bullet_container.add_child(bullet)
 	
@@ -108,7 +154,6 @@ func _take_damage(damage):
 	
 	if current_life <= 0:
 		game_over()
-		# 리스폰 
 	else:
 		respawn()
 
@@ -125,6 +170,10 @@ func respawn() -> void:
 	visible = false
 	is_invincible = true
 	
+	# 죽었을 때 폭탄 개수를 다시 채워줄지(리스셋) 여부는 기획에 따라 다름. 여기선 일단 유지.
+	# current_bomb = max_bomb # 만약 죽으면 폭탄 채워주려면 주석 해제
+	# bomb_changed.emit(current_bomb)
+	
 	var view_rect = get_viewport_rect()
 	position = Vector2(respawn_position.x, view_rect.size.y + 100)
 	# 2. 살짝 대기 (1초)
@@ -132,20 +181,8 @@ func respawn() -> void:
 	
 	# 3. 화면 아래쪽에서 등장 준비
 	visible = true
-	# 화면 값 얻어오기
 	
-	# 화면 값 얻어온 것에서 y로 아래로 내리기
 	# 4. 슬라이딩 연출 (Tween 사용)
-		# 1. tween.set_trans(Tween.TRANS_CUBIC)
-		# "변화의 그래프 모양(가속도 곡선)"을 정합니다.
-			# 기본값 (TRANS_LINEAR): 기계처럼 처음부터 끝까지 똑같은 속도로 움직입니다. (밋밋함)
-			# TRANS_CUBIC: 3차 함수($y=x^3$) 곡선을 따릅니다. 속도가 급격하게 변하는 구간이 있어서, 훨씬 부드럽고 자연스러운 느낌을 줍니다.
-		# 2. tween.set_ease(Tween.EASE_OUT)
-		# "곡선의 어느 부분을 쓸 것인가(가속이냐 감속이냐)를 정합니다.
-			#EASE_IN (진입): 천천히 시작해서 점점 빨라집니다. (예: 로켓 발사, 자동차 출발)
-			#EASE_OUT (진출): 빠르게 시작해서 점점 느려집니다. (예: 급브레이크, 슬라이딩)
-			#EASE_IN_OUT: 천천히 시작했다가 중간에 빨라지고, 다시 천천히 멈춥니다.
-	
 	var respawn_tween = create_tween()
 	respawn_tween.set_trans(Tween.TRANS_CUBIC)
 	respawn_tween.set_ease(Tween.EASE_OUT)

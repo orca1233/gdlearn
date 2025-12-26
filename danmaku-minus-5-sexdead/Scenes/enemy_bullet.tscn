@@ -4,7 +4,7 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tcvu8"]
 
-[node name="EnemyBullet" type="Area2D"]
+[node name="EnemyBullet" type="Area2D" groups=["enemy_bullet"]]
 z_index = 100
 z_as_relative = false
 collision_layer = 32768

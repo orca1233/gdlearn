@@ -13,11 +13,27 @@ offset_bottom = 23.0
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -71.0
-offset_right = 107.05005
-offset_bottom = 42.499996
+offset_left = -20.0
+offset_bottom = 20.0
 grow_horizontal = 0
 scale = Vector2(0.4, 0.4)
+size_flags_horizontal = 2
+theme_override_constants/separation = 110
+alignment = 2
+
+[node name="Bomb" type="HBoxContainer" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -20.0
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(0.4, 0.4)
+size_flags_horizontal = 2
+theme_override_constants/separation = 110
 alignment = 2
 
 [node name="score_timer" type="Timer" parent="."]

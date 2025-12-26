@@ -1,7 +1,20 @@
-[gd_scene load_steps=3 format=3 uid="uid://b3lv2cgck0rfu"]
+[gd_scene load_steps=7 format=3 uid="uid://b3lv2cgck0rfu"]
 
 [ext_resource type="PackedScene" uid="uid://bkt3kddvmrluk" path="res://Scenes/player.tscn" id="1_7shky"]
 [ext_resource type="Script" uid="uid://dnt2no7201hnm" path="res://Scripts/enemy_spawner.gd" id="2_28uw7"]
+[ext_resource type="Script" uid="uid://c351bv2pb62ek" path="res://Scripts/spawn_event.gd" id="3_qkro7"]
+[ext_resource type="PackedScene" uid="uid://bbka7ag0x2ol5" path="res://Scenes/Path/enemy_path.tscn" id="4_8fy4n"]
+[ext_resource type="PackedScene" uid="uid://07jk8mvg2bqc" path="res://Scenes/boss_1.tscn" id="5_qkro7"]
+
+[sub_resource type="Resource" id="Resource_i4478"]
+script = ExtResource("3_qkro7")
+spawn_time = 1.0
+enemy_scene = ExtResource("5_qkro7")
+enemy_path = ExtResource("4_8fy4n")
+count = 5
+interval = 0.2
+isMirror = true
+metadata/_custom_type_script = "uid://c351bv2pb62ek"
 
 [node name="Gameplaycontainer" type="Node2D"]
 
@@ -14,3 +27,4 @@ position = Vector2(576, 600)
 
 [node name="EnemySpawner" type="Node2D" parent="."]
 script = ExtResource("2_28uw7")
+events = Array[ExtResource("3_qkro7")]([SubResource("Resource_i4478")])
