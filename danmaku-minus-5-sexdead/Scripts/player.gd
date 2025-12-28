@@ -28,6 +28,24 @@ var current_life: int
 var can_shoot: bool = true
 var is_invincible: bool = false # 무적 상태 확인
 
+# 파워업 관련 변수
+@export_group("PowerUp")
+# 초기 파워
+@export var power: int = 10
+# 2갈래 변수
+@export var two_barrel : int = 20
+@export var three_barrel : int = 30
+# 4갈래 변수
+@export var four_barrel : int = 40
+
+@export_group("Bullet Positions")
+# 각 레벨에서 사용할 마커들을 인스펙터에서 배열로 넣을 수 있게 선언
+@export var level1_markers: Array[Marker2D]
+@export var level2_markers: Array[Marker2D]
+@export var level3_markers: Array[Marker2D]
+@export var level4_markers: Array[Marker2D]
+var active_markers: Array[Marker2D] = []
+
 @onready var hitbox_sprite = $HitboxSprite
 @onready var shoot_timer = $shoot_timer
 
@@ -35,6 +53,8 @@ var is_invincible: bool = false # 무적 상태 확인
 signal life_changed(new_life: int)
 signal bomb_changed(new_bomb: int) # 폭탄 개수 변화 신호 추가
 signal player_died
+signal item_collected(amount: int) # 아이템 획득 신호 (UI 연결용)
+signal power_changed(new_power: int) # power 변경 신호
 
 func _ready() -> void:
 	# 목숨 수 초기화
@@ -51,6 +71,9 @@ func _ready() -> void:
 	# UI 초기화를 위해 신호 발신
 	life_changed.emit(current_life)
 	bomb_changed.emit(current_bomb)
+	
+	# 탄막 한번 초기화
+	check_power_level()
 
 
 # 충돌이나 slide 어쩌고 할때는 _physics process 쓰는게 좋다는 글을 봄
@@ -125,18 +148,25 @@ func shoot() -> void:
 	if not can_shoot or not bullet_scene:
 		return
 	
-	# 총알 생성
-	var bullet = bullet_scene.instantiate()
-	# 총알은 플레이어 앞 marker 위치에서 소환
-	bullet.position = $BulletPos.global_position
-	# 총알을 불렛컨테이너에 추가
-	var bullet_container = get_parent().get_node("Bulletcontainer")
-	bullet_container.add_child(bullet)
-	
+	# active_markers 안에 있는 marker가 뭐가 있는지 찾음
+	for marker in active_markers:
+		# active markers 의 위치에서 발사
+		if marker:
+			create_bullet(marker.global_position)
+
 	# 쿨타임 도입, 수동 재시작 -> shoot timer 자동 시작 꺼놔야함
 	can_shoot = false
 	shoot_timer.start()
 
+func create_bullet(pos: Vector2) -> void:
+	var bullet = bullet_scene.instantiate()
+	bullet.position = pos
+	# Bulletcontainer가 없으면 현재 씬에 추가
+	var container = get_parent().get_node_or_null("Bulletcontainer")
+	if container:
+		container.add_child(bullet)
+	else:
+		get_parent().add_child(bullet)
 
 func _on_shoot_timer_timeout() -> void:
 	can_shoot = true
@@ -160,7 +190,7 @@ func _take_damage(damage):
 func game_over() -> void:
 	# 사망 신호 발신
 	player_died.emit()
-	
+	visible = false
 	# 조작권 뺏기
 	set_physics_process(false)
 
@@ -169,10 +199,6 @@ func respawn() -> void:
 	set_physics_process(false)
 	visible = false
 	is_invincible = true
-	
-	# 죽었을 때 폭탄 개수를 다시 채워줄지(리스셋) 여부는 기획에 따라 다름. 여기선 일단 유지.
-	# current_bomb = max_bomb # 만약 죽으면 폭탄 채워주려면 주석 해제
-	# bomb_changed.emit(current_bomb)
 	
 	var view_rect = get_viewport_rect()
 	position = Vector2(respawn_position.x, view_rect.size.y + 100)
@@ -208,3 +234,38 @@ func respawn() -> void:
 		blink_tween.kill() # blink tween 있으면 죽이고 / alpha 값 1.0으로 만들기
 		modulate.a = 1.0
 	is_invincible = false # 그 후에 무적 해제
+	
+# 아이템 획득 로직
+# type 0: Power, 1: Score, 2: BOMB
+func get_item(type, value):
+	if type == 0: # Power
+		# 먹은 수만큼 +=
+		power += value
+		check_power_level()
+		power_changed.emit(power)
+	elif type == 1: # Score
+		item_collected.emit(type, value) # UI로 신호 전달
+	elif type == 2: # BOMB
+		current_bomb += value
+		bomb_changed.emit(current_bomb)
+
+		bomb_changed.emit(current_bomb)
+
+func check_power_level():
+	# 모든 마커(level 1 / 2 / 3 / 4) 배열 합친 다음에 전부 꺼버림
+	for marker in level1_markers + level2_markers + level3_markers +level4_markers:
+		if marker: marker.visible = false
+
+	# 10 / 20 / 30 / 40. 10 단위마다 총알 갯수 변경
+	if power >= four_barrel:
+		active_markers = level4_markers
+	elif power >= three_barrel:
+		active_markers = level3_markers
+	elif power >= two_barrel:
+		active_markers = level2_markers
+	else:
+		active_markers = level1_markers
+
+	# 그 이후 다시 active markers 찾아서 그 안에 있는 marker만 보이도록 함
+	for marker in active_markers:
+		if marker: marker.visible = true

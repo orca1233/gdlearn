@@ -19,8 +19,11 @@ func _ready() -> void:
 		# life 변한 것 uicanvas한테 알려줄 수 있게 connect
 		player.life_changed.connect(ui_canvas._on_player_life_changed)
 		
-		# 폭탄 변한 것 uicanvas한테 알려줄 수 있게 connect (추가됨)
+		# 폭탄 변한 것 uicanvas한테 알려줄 수 있게 connect
 		player.bomb_changed.connect(ui_canvas._on_player_bomb_changed)
+		
+		# score item 먹으면 알려주기
+		player.item_collected.connect(ui_canvas._on_take_item)
 
 		# Player의 _ready()가 GameScene보다 먼저 실행되면 current life 발신을 놓칠 수도 있어서
 		# 귀찮지만 한번 더 수동 갱신

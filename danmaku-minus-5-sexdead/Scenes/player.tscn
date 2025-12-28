@@ -16,11 +16,15 @@ radius = 5.0
 atlas = ExtResource("3_38rej")
 region = Rect2(1280, 704, 64, 64)
 
-[node name="CharacterBody2D" type="CharacterBody2D" groups=["player"]]
+[node name="CharacterBody2D" type="CharacterBody2D" node_paths=PackedStringArray("level1_markers", "level2_markers", "level3_markers", "level4_markers") groups=["player"]]
 collision_mask = 32776
 script = ExtResource("2_7dd06")
 focus_speed = 70.0
 bomb_scene = ExtResource("2_vgqql")
+level1_markers = [NodePath("Muzzle/Center")]
+level2_markers = [NodePath("Muzzle/Left1"), NodePath("Muzzle/Right1")]
+level3_markers = [NodePath("Muzzle/Center"), NodePath("Muzzle/Left1"), NodePath("Muzzle/Right1")]
+level4_markers = [NodePath("Muzzle/Left1"), NodePath("Muzzle/Left2"), NodePath("Muzzle/Right1"), NodePath("Muzzle/Right2")]
 
 [node name="PlayerSprite" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
@@ -33,11 +37,41 @@ texture = SubResource("AtlasTexture_t1xgp")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_38rej")
 
-[node name="BulletPos" type="Marker2D" parent="."]
+[node name="Muzzle" type="Node2D" parent="."]
+
+[node name="Center" type="Marker2D" parent="Muzzle"]
 position = Vector2(0, -28.09)
 scale = Vector2(0.185, 0.185)
 
-[node name="Sprite2D" type="Sprite2D" parent="BulletPos"]
+[node name="Sprite2D" type="Sprite2D" parent="Muzzle/Center"]
+texture = SubResource("AtlasTexture_6t5aa")
+
+[node name="Left1" type="Marker2D" parent="Muzzle"]
+position = Vector2(-13.75, -20)
+scale = Vector2(0.185, 0.185)
+
+[node name="Sprite2D" type="Sprite2D" parent="Muzzle/Left1"]
+texture = SubResource("AtlasTexture_6t5aa")
+
+[node name="Left2" type="Marker2D" parent="Muzzle"]
+position = Vector2(-24, -10)
+scale = Vector2(0.185, 0.185)
+
+[node name="Sprite2D" type="Sprite2D" parent="Muzzle/Left2"]
+texture = SubResource("AtlasTexture_6t5aa")
+
+[node name="Right1" type="Marker2D" parent="Muzzle"]
+position = Vector2(13.75, -20)
+scale = Vector2(0.185, 0.185)
+
+[node name="Sprite2D" type="Sprite2D" parent="Muzzle/Right1"]
+texture = SubResource("AtlasTexture_6t5aa")
+
+[node name="Right2" type="Marker2D" parent="Muzzle"]
+position = Vector2(24, -10)
+scale = Vector2(0.185, 0.185)
+
+[node name="Sprite2D" type="Sprite2D" parent="Muzzle/Right2"]
 texture = SubResource("AtlasTexture_6t5aa")
 
 [node name="shoot_timer" type="Timer" parent="."]

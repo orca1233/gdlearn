@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://co8vgy4b843rn"]
+[gd_scene load_steps=6 format=3 uid="uid://co8vgy4b843rn"]
 
 [ext_resource type="Texture2D" uid="uid://dvrg17cibrfs4" path="res://Assets/Portrait/playerShip1_blue.png" id="1_atlr2"]
 [ext_resource type="Script" uid="uid://2fclj5kde7eh" path="res://Scripts/enemy.gd" id="1_e2b7p"]
 [ext_resource type="PackedScene" uid="uid://c5btjhmhi6l4x" path="res://Scenes/enemy_bullet.tscn" id="2_2g0jp"]
+[ext_resource type="PackedScene" uid="uid://di7d2tor3pfii" path="res://Scenes/item.tscn" id="3_dmwl5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_e2b7p"]
 radius = 11.045361
@@ -14,6 +15,7 @@ collision_layer = 8
 collision_mask = 3
 script = ExtResource("1_e2b7p")
 bullet_scene = ExtResource("2_2g0jp")
+item_scene = ExtResource("3_dmwl5")
 shoot_interval = 0.2
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

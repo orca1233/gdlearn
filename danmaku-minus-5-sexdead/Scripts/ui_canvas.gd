@@ -9,6 +9,7 @@ var bombimage = load("res://Assets/Portrait/icon.svg")
 var time_elapsed : int
 var kill_score : int
 var total_score : int
+var item_score : int
 
 func _ready() -> void:
 
@@ -83,7 +84,7 @@ func _input(event):
 # 스코어 판 갱신해주는 함수
 func _update_score_display() -> void:
 	# 시간 점수 + 처치 점수
-	total_score = (time_elapsed * 1000) + kill_score
+	total_score = (time_elapsed * 1000) + kill_score + item_score
 	$Score.text = "Score : " + str(total_score)
 
 # 1초마다 실행되는 타이머
@@ -95,3 +96,10 @@ func _on_score_timer_timeout() -> void:
 func _on_object_died() -> void:
 	kill_score += 100000 # 적 점수 저장소에 추가
 	_update_score_display() # 적 죽었으니 점수 갱신
+	
+# 아이템 먹었을 때 실행되는 함수
+func _on_take_item(type, value) -> void:
+	# type = 1 = score 면 value 만큼 더해줌
+	if type == 1:
+		item_score += value # 아이템 점수 저장소에 추가
+		_update_score_display() # 아이템 먹었으니 점수 갱신

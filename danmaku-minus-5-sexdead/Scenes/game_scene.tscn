@@ -7,7 +7,7 @@
 
 [node name="Gamescene" type="Node2D"]
 script = ExtResource("1_fiftr")
-stage_duration = 50
+stage_duration = 60.0
 
 [node name="Parrallax2D" parent="." instance=ExtResource("2_fiftr")]
 

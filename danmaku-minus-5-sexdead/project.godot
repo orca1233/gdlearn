@@ -72,4 +72,5 @@ bomb={
 2d_physics/layer_1="플레이어"
 2d_physics/layer_2="플레이어 총알"
 2d_physics/layer_4="적 본체"
+2d_physics/layer_12="아이템"
 2d_physics/layer_16="적 총알"
