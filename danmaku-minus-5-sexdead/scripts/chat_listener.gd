@@ -1,11 +1,6 @@
 extends Node
 
-# Chat Listener script
+func _on_message_received(message):
+    print("Received message: " + message)
 
-func _ready():
-    print("Chat listener is ready!")
-
-func _on_chat_message_received(message):
-    print("Message received: " + message)
-
-# 수정본
+# 수정본2
