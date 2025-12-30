@@ -1,11 +1,11 @@
 extends Node
 
-signal message_received(message)
+# Chat Listener script
 
 func _ready():
-    var chat_channel = get_node("/root/ChatChannel")
-    chat_channel.connect("message_sent", self, "_on_message_sent")
+    print("Chat listener is ready!")
 
-func _on_message_sent(message):
-    emit_signal("message_received", message)
+func _on_chat_message_received(message):
     print("Message received: " + message)
+
+# 수정본
