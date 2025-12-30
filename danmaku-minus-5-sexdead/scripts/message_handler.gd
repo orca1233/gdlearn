@@ -1,7 +1,10 @@
 extends Node
 
-func _on_message_received(message):
-    if message.startswith('!코드'):
+func _ready():
+    print("디스코드 메시지 요청을 처리합니다.")
+
+func handle_message(message):
+    if message.begins_with("!코드 "):
         var code_request = message.substr(6)
-        # 요청된 코드에 대한 처리 로직 추가
-        pass
+        print("사용자 요청된 코드: " + code_request)
+        # 코드 처리 로직 추가
