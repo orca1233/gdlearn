@@ -33,6 +33,8 @@ func _ready() -> void:
 		# 사망 연결용
 		player.player_died.connect(ui_canvas._on_player_died)
 		enemy_spawner.enemy_spawned.connect(_on_enemy_spawned)
+		
+		audio_manager.play_bgm("stage")
 
 func _on_enemy_spawned(enemy_instance) -> void:
 	# 생성된 적의 'enemy_died' 신호를 UI의 '_on_object_died' 함수에 연결

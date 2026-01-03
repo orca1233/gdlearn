@@ -18,6 +18,7 @@ config/icon="res://Boss/icon.svg"
 [autoload]
 
 vfx_manager="*res://Scripts/vfx_manager.gd"
+audio_manager="*res://Scripts/audio_manager.gd"
 
 [input]
 

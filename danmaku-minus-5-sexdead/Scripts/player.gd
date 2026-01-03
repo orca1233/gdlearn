@@ -181,6 +181,7 @@ func _take_damage(damage):
 	life_changed.emit(current_life)
 	# 폭발 이펙트 재생
 	vfx_manager.spawn_explosion(global_position)
+	audio_manager.play_sfx("playerdead")
 	
 	if current_life <= 0:
 		game_over()
