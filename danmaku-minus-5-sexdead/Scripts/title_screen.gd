@@ -54,7 +54,7 @@ func _on_music_volume_slider_value_changed(value: float):
 	
 # 3. SFX 볼륨
 func _on_audio_volume_slider_value_changed(value: float):
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"), linear_to_db(audio_slider.value))
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"), linear_to_db(audio_slider.value / 100))
 	$OptionPanel/CenterContainer/VBoxContainer/AudioVolumeContainer/ValueLabel.text = str(int(audio_slider.value)) + "%"
 
 #========================================
