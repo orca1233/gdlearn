@@ -12,16 +12,19 @@ signal enemy_died
 
 func _process(delta):
 	var progress = get_parent().progress_ratio
-
+	
 	# 1. 중간(40%)부터 거의 끝(90%)까지 공격
 	if progress >= 0.3 and progress <= 0.6:
 		shoot_timer += delta
 		if shoot_timer >= shoot_interval:
 			shoot_at_player()
 			shoot_timer = 0.0
-			# 추가 공격 패턴 (예: 1회의 공격 후, 넓게 총알 발사)
+
+	# 2. 주기적으로 폭발 공격
+	if progress > 0.5:
+		shoot_timer += delta
 		if shoot_timer >= shoot_interval * 2:
-			spread_shoot()
+			explosive_attack()
 			shoot_timer = 0.0
 
 func shoot_at_player():
@@ -42,31 +45,25 @@ func shoot_at_player():
 	if player:
 		b.direction = (player.global_position - global_position).normalized()
 
-func spread_shoot():
-	if bullet_scene == null:
-		return
-	
-	# 여러 개의 총알 발사
-	var spread_count = 5
-	var angle_step = 15 # 각도 간격
-	var start_angle = -((spread_count - 1) / 2) * angle_step
-	
-	for i in range(spread_count):
-		var b = bullet_scene.instantiate()
-		get_tree().current_scene.add_child(b)
-		b.global_position = global_position
-		var angle = start_angle + i * angle_step
-		b.direction = get_vector(angle) # 방향 설정
+func explosive_attack():
+	# 폭발 공격 로직 구현
+	for angle in range(0, 360, 45):
+		var bullet = bullet_scene.instantiate()
+		bullet.global_position = global_position
+		bullet.direction = Vector2(cos(deg2rad(angle)), sin(deg2rad(angle))).normalized()
+		get_tree().current_scene.add_child(bullet)
 
 func _on_body_entered(body: Node2D) -> void:
+	## 적이 CharacterBody2D면 이거 쓰고
 	if body.has_method("_take_damage"):
 		body._take_damage(damage)
 
+# 보스한테도 적용 가능하게
 func _take_damage(damage):
 	current_life -= damage
 	if current_life <= 0:
 		_object_died()
 		queue_free()
-
+	
 func _object_died():
 	enemy_died.emit()
