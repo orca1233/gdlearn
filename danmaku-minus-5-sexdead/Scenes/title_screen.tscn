@@ -1,0 +1,112 @@
+[gd_scene load_steps=4 format=3 uid="uid://uj48cb4hippt"]
+
+[ext_resource type="Texture2D" uid="uid://cyn88x3wm0heh" path="res://Assets/BG/BG_TitleScreen.png" id="1_klylv"]
+[ext_resource type="Script" uid="uid://bxisdj1nqc0xv" path="res://Scripts/title_screen.gd" id="1_p3fck"]
+[ext_resource type="PackedScene" uid="uid://cxeldxtudj6tm" path="res://Scenes/game_scene.tscn" id="2_4gxqj"]
+
+[node name="TitleScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_p3fck")
+start_scene = ExtResource("2_4gxqj")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+offset_left = -826.13
+offset_top = -422.72
+offset_right = 639.87
+offset_bottom = 443.28
+texture = ExtResource("1_klylv")
+expand_mode = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -459.0
+offset_top = -35.0
+offset_right = 459.0
+offset_bottom = 35.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="GameTitle" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(2.7092478, 0.29910272, 2.4666095, 1)
+theme_override_colors/font_outline_color = Color(0, 0.45882353, 0.17254902, 1)
+theme_override_font_sizes/font_size = 70
+text = "Danmaku Minus 5 SEX DEAD"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StartButton" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "게임 시작"
+
+[node name="OptionButton" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "옵션"
+
+[node name="QuitButton" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "게임 종료"
+
+[node name="OptionPanel" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="OptionPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -91.5
+offset_top = -20.0
+offset_right = 91.5
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="OptionPanel/CenterContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="MessageLabel" type="Label" parent="OptionPanel/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+text = "현재 준비된 기능이 아닙니다. 닥치고 닫기 눌러주세용"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CloseButton" type="Button" parent="OptionPanel/CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "닫기"
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/OptionButton" to="." method="_on_option_button_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="OptionPanel/CenterContainer/VBoxContainer/CloseButton" to="." method="_on_close_button_pressed"]

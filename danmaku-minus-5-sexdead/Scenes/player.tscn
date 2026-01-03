@@ -20,6 +20,7 @@ region = Rect2(1280, 704, 64, 64)
 collision_mask = 32776
 script = ExtResource("2_7dd06")
 focus_speed = 70.0
+max_life = 1
 bomb_scene = ExtResource("2_vgqql")
 level1_markers = [NodePath("Muzzle/Center")]
 level2_markers = [NodePath("Muzzle/Left1"), NodePath("Muzzle/Right1")]
