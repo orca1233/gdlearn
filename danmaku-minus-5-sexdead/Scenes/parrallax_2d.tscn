@@ -4,6 +4,7 @@
 
 [node name="Parrallax2D" type="Parallax2D"]
 texture_filter = 1
+scale = Vector2(1.105, 1.105)
 repeat_size = Vector2(0, 2067.555)
 autoscroll = Vector2(0, 100)
 

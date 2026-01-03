@@ -20,6 +20,16 @@ config/icon="res://Boss/icon.svg"
 vfx_manager="*res://Scripts/vfx_manager.gd"
 audio_manager="*res://Scripts/audio_manager.gd"
 
+[debug]
+
+settings/stdout/print_fps=true
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/stretch/mode="canvas_items"
+
 [gui]
 
 theme/custom="uid://dq7rmes1i4ip8"

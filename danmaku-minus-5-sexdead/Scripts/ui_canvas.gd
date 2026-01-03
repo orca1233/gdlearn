@@ -32,6 +32,7 @@ func _ready() -> void:
 		bomb.grow_horizontal = Control.GROW_DIRECTION_BEGIN
 		# 3. 정렬
 		bomb.alignment = BoxContainer.ALIGNMENT_END
+	$Gameoverpanel.visible = false
 
 func _on_player_life_changed(new_life: int) -> void:
 	# 1. 기존에 그려진 하트들을 모두 삭제

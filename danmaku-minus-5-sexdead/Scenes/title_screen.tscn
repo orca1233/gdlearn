@@ -77,6 +77,21 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="ColorRect" type="ColorRect" parent="OptionPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -200.0
+offset_right = 150.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.18359044, 0.18359044, 0.18359044, 1)
+
 [node name="CenterContainer" type="CenterContainer" parent="OptionPanel"]
 layout_mode = 1
 anchors_preset = 8
@@ -84,29 +99,173 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -91.5
-offset_top = -20.0
-offset_right = 91.5
-offset_bottom = 20.0
+offset_left = -166.5
+offset_top = -23.0
+offset_right = 166.5
+offset_bottom = 23.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="OptionPanel/CenterContainer"]
 layout_mode = 2
+theme_override_constants/separation = 13
 alignment = 1
 
-[node name="MessageLabel" type="Label" parent="OptionPanel/CenterContainer/VBoxContainer"]
+[node name="TitleLabel" type="Label" parent="OptionPanel/CenterContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 0, 0, 1)
-text = "현재 준비된 기능이 아닙니다. 닥치고 닫기 눌러주세용"
+text = "옵션"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="CloseButton" type="Button" parent="OptionPanel/CenterContainer/VBoxContainer"]
+[node name="SeparatorLabel" type="Label" parent="OptionPanel/CenterContainer/VBoxContainer"]
 layout_mode = 2
-text = "닫기"
+text = "[볼륨 설정]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MasterVolumeContainer" type="HBoxContainer" parent="OptionPanel/CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 8
+
+[node name="Label" type="Label" parent="OptionPanel/CenterContainer/VBoxContainer/MasterVolumeContainer"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "마스터 볼륨"
+
+[node name="MasterVolumeSlider" type="HSlider" parent="OptionPanel/CenterContainer/VBoxContainer/MasterVolumeContainer"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ValueLabel" type="Label" parent="OptionPanel/CenterContainer/VBoxContainer/MasterVolumeContainer"]
+custom_minimum_size = Vector2(45, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+text = "100%"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="MusicVolumeContainer" type="HBoxContainer" parent="OptionPanel/CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 8
+
+[node name="Label" type="Label" parent="OptionPanel/CenterContainer/VBoxContainer/MusicVolumeContainer"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "BGM 볼륨"
+
+[node name="MusicVolumeSlider" type="HSlider" parent="OptionPanel/CenterContainer/VBoxContainer/MusicVolumeContainer"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ValueLabel" type="Label" parent="OptionPanel/CenterContainer/VBoxContainer/MusicVolumeContainer"]
+custom_minimum_size = Vector2(45, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+text = "7%"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="AudioVolumeContainer" type="HBoxContainer" parent="OptionPanel/CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 8
+
+[node name="Label" type="Label" parent="OptionPanel/CenterContainer/VBoxContainer/AudioVolumeContainer"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "효과음 볼륨"
+
+[node name="AudioVolumeSlider" type="HSlider" parent="OptionPanel/CenterContainer/VBoxContainer/AudioVolumeContainer"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ValueLabel" type="Label" parent="OptionPanel/CenterContainer/VBoxContainer/AudioVolumeContainer"]
+custom_minimum_size = Vector2(45, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+text = "9%"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="SeparatorLabel2" type="Label" parent="OptionPanel/CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "[인게임 설정]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ResolutionContainer" type="HBoxContainer" parent="OptionPanel/CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Label" type="Label" parent="OptionPanel/CenterContainer/VBoxContainer/ResolutionContainer"]
+custom_minimum_size = Vector2(77, 0)
+layout_mode = 2
+text = "해상도 설정"
+
+[node name="RelosutionOptionButton" type="OptionButton" parent="OptionPanel/CenterContainer/VBoxContainer/ResolutionContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+item_count = 2
+popup/item_0/text = "창모드(1280x720)"
+popup/item_0/id = 0
+popup/item_1/text = "전체 모드(1920x1080)"
+popup/item_1/id = 1
+
+[node name="FPSContainer" type="HBoxContainer" parent="OptionPanel/CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Label" type="Label" parent="OptionPanel/CenterContainer/VBoxContainer/FPSContainer"]
+custom_minimum_size = Vector2(77, 0)
+layout_mode = 2
+text = "FPS 설정"
+
+[node name="FPSOptionButton" type="OptionButton" parent="OptionPanel/CenterContainer/VBoxContainer/FPSContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+item_count = 3
+popup/item_0/text = "30fps"
+popup/item_0/id = 0
+popup/item_1/text = "60fps"
+popup/item_1/id = 1
+popup/item_2/text = "무제한"
+popup/item_2/id = 2
+
+[node name="SeparatorLabel3" type="Label" parent="OptionPanel/CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "ーーーーーーーーーーーー"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonContainer" type="HBoxContainer" parent="OptionPanel/CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Button" type="Button" parent="OptionPanel/CenterContainer/VBoxContainer/ButtonContainer"]
+layout_mode = 2
+text = "초기 설정으로 되돌리기"
+
+[node name="OptionQuitButton" type="Button" parent="OptionPanel/CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "나가기"
 
 [connection signal="pressed" from="CenterContainer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/OptionButton" to="." method="_on_option_button_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
-[connection signal="pressed" from="OptionPanel/CenterContainer/VBoxContainer/CloseButton" to="." method="_on_close_button_pressed"]
+[connection signal="value_changed" from="OptionPanel/CenterContainer/VBoxContainer/MasterVolumeContainer/MasterVolumeSlider" to="." method="_on_master_volume_slider_value_changed"]
+[connection signal="value_changed" from="OptionPanel/CenterContainer/VBoxContainer/MusicVolumeContainer/MusicVolumeSlider" to="." method="_on_music_volume_slider_value_changed"]
+[connection signal="value_changed" from="OptionPanel/CenterContainer/VBoxContainer/AudioVolumeContainer/AudioVolumeSlider" to="." method="_on_audio_volume_slider_value_changed"]
+[connection signal="item_selected" from="OptionPanel/CenterContainer/VBoxContainer/ResolutionContainer/RelosutionOptionButton" to="." method="_on_relosution_option_button_item_selected"]
+[connection signal="item_selected" from="OptionPanel/CenterContainer/VBoxContainer/FPSContainer/FPSOptionButton" to="." method="_on_fps_option_button_item_selected"]
+[connection signal="pressed" from="OptionPanel/CenterContainer/VBoxContainer/OptionQuitButton" to="." method="_on_option_quit_button_pressed"]

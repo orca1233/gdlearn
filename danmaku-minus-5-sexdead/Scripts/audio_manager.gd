@@ -10,6 +10,7 @@ extends Node
 # BGM 파일 프리로드 (파일 경로는 실제 사운드 추가 후 수정)
 var bgm_tracks = {
 	"stage": preload("res://Assets/Sound/BGM/stage_bgm_001.mp3"),
+	"title": preload("res://Assets/Sound/BGM/title_bgm_001.mp3")
 }
 
 # ============================================
