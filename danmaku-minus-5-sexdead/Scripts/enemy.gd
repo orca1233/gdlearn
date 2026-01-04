@@ -11,10 +11,21 @@ var shoot_timer = 0.0
 signal enemy_died
 
 func _process(delta):
-	var progress = get_parent().progress_ratio
+	var parent = get_parent()
+	var should_shoot = false
 	
-	# 1. 중간(40%)부터 거의 끝(90%)까지 공격
-	if progress >= 0.3 and progress <= 0.6:
+	# 1. 부모가 '길(PathFollow2D)'인지 확인 (안전장치 🛡️)
+	if parent is PathFollow2D:
+		# 길 위에 있다면, 특정 구간(30%~60%)에서만 공격
+		var progress = parent.progress_ratio
+		if progress >= 0.3 and progress <= 0.6:
+			should_shoot = true
+	else:
+		# 길 위에 없는 경우 (그냥 배치된 적) -> 항상 공격 모드
+		should_shoot = true 
+
+	# 2. 공격 실행 로직
+	if should_shoot:
 		shoot_timer += delta
 		if shoot_timer >= shoot_interval:
 			shoot_at_player()
