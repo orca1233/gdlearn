@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://x43eono1xn32" path="res://Scripts/boss_1.gd" id="1_a8swx"]
 [ext_resource type="Texture2D" uid="uid://l44ux140up27" path="res://Assets/Danmaku/Shot_02.png" id="2_1x1n5"]
 [ext_resource type="PackedScene" uid="uid://c5btjhmhi6l4x" path="res://Scenes/enemy_bullet.tscn" id="2_f666b"]
-[ext_resource type="Script" uid="uid://eepqu3wefdh5" path="res://Scripts/boss1_bullet_pattern_contoller.gd" id="4_q8p7u"]
+[ext_resource type="Script" uid="uid://eepqu3wefdh5" path="res://Scripts/boss1_bullet_pattern_controller.gd" id="4_q8p7u"]
 [ext_resource type="Script" uid="uid://bkeye01eemqwl" path="res://Scripts/boss_pattern_data.gd" id="5_y0rh1"]
 [ext_resource type="Resource" uid="uid://hr618uga0tqc" path="res://Resource/red.tres" id="6_f1msb"]
 [ext_resource type="Resource" uid="uid://d3ejhxwajw3ad" path="res://Resource/blue.tres" id="7_f1msb"]

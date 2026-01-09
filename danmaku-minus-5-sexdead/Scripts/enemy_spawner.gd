@@ -39,7 +39,9 @@ func start_spawn_routine(event: SpawnEvent) -> void:
 func spawn_single_enemy(event: SpawnEvent, is_mirrored: bool = false) -> void:
 	# event에서 path_scene을 가져와서 인스턴스화하고 path_inst에 저장
 	var path_inst = event.enemy_path.instantiate()
-	get_tree().current_scene.add_child(path_inst)
+	# get_tree().current_scene.add_child(path_inst)
+	# EnemyContainer에 추가
+	get_tree().current_scene.enemy_container.add_child(path_inst)
 	
 	# 만약 is_mirrored가 체크되어 있으면(TRUE)
 	if is_mirrored:

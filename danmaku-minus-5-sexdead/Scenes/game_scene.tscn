@@ -1,21 +1,30 @@
-[gd_scene load_steps=5 format=3 uid="uid://cxeldxtudj6tm"]
+[gd_scene load_steps=6 format=3 uid="uid://cxeldxtudj6tm"]
 
 [ext_resource type="Script" uid="uid://d3l187y02v8cc" path="res://Scripts/game_scene.gd" id="1_fiftr"]
 [ext_resource type="PackedScene" uid="uid://7yn6afyqhvr5" path="res://Scenes/parrallax_2d.tscn" id="2_fiftr"]
 [ext_resource type="PackedScene" uid="uid://b3lv2cgck0rfu" path="res://Scenes/gameplay_container.tscn" id="3_1ixah"]
 [ext_resource type="PackedScene" uid="uid://dqmgm5fta65hn" path="res://Scenes/ui_canvas.tscn" id="3_6h5vk"]
+[ext_resource type="PackedScene" uid="uid://6cq6emrhrhj5" path="res://Scenes/option_panel.tscn" id="5_1ixah"]
 
 [node name="Gamescene" type="Node2D"]
+process_mode = 3
 script = ExtResource("1_fiftr")
 stage_duration = 60.0
 
 [node name="Parrallax2D" parent="." instance=ExtResource("2_fiftr")]
+process_mode = 1
 
 [node name="Gameplaycontainer" parent="." instance=ExtResource("3_1ixah")]
+process_mode = 1
 
 [node name="UIcanvas" parent="." instance=ExtResource("3_6h5vk")]
+process_mode = 1
+
+[node name="OptionPanel" parent="UIcanvas" instance=ExtResource("5_1ixah")]
+process_mode = 3
 
 [node name="StageTimer" type="Timer" parent="."]
+process_mode = 1
 wait_time = 3.0
 one_shot = true
 

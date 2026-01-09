@@ -80,7 +80,9 @@ func _on_fire_timeout():
 
 func shoot(angle: float):
 	var bullet = bullet_node.instantiate()
-	get_tree().current_scene.add_child(bullet)
+	# get_tree().current_scene.add_child(bullet)
+	# BulletContainer에 추가
+	get_tree().current_scene.bullet_container.add_child(bullet)
 	
 	# 오프셋 및 방향 보정 적용
 	var final_pos = global_position + current_data.spawn_offset.rotated(global_rotation)

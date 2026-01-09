@@ -43,7 +43,9 @@ func shoot_at_player():
 	var b = bullet_scene.instantiate()
 	
 	# 2. 화면에 추가 (이게 global_position 설정보다 먼저 와야 합니다!)
-	get_tree().current_scene.add_child(b)
+	# get_tree().current_scene.add_child(b)
+	# BulletContainer에 추가
+	get_tree().current_scene.bullet_container.add_child(b)
 	
 	# 3. 위치 설정 (이제 화면에 존재하므로 위치를 잡을 수 있습니다)
 	b.global_position = global_position
