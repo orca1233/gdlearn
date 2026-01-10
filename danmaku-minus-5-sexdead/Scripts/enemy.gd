@@ -17,43 +17,6 @@ var shoot_timer = 0.0
 
 signal enemy_died
 
-func _process(delta):
-	# PathFollow2D가 부모라고 가정 (path를 따라가는 적)
-	if get_parent() is PathFollow2D:
-		var progress = get_parent().progress_ratio
-		
-		# 중간(30%)부터 60%까지 공격
-		if progress >= 0.3 and progress <= 0.6:
-			shoot_timer += delta
-			if shoot_timer >= shoot_interval:
-				shoot_at_player()
-				shoot_timer = 0.0
-	else:
-		# 부모가 PathFollow2D가 아니면 그냥 공격 (이게 없어서 shoot을 안하는 경우가 있었음)
-		shoot_timer += delta
-		if shoot_timer >= shoot_interval:
-			shoot_at_player()
-			shoot_timer = 0.0
-
-func shoot_at_player():
-	if bullet_scene == null:
-		return
-		
-	# 1. 총알 복사 (메모리에 생성)
-	var b = bullet_scene.instantiate()
-	
-	# 2. 화면에 추가 (이게 global_position 설정보다 먼저 와야 합니다!)
-	# get_tree().current_scene.add_child(b)
-	# BulletContainer에 추가
-	get_tree().current_scene.bullet_container.add_child(b)
-	
-	# 3. 위치 설정 (이제 화면에 존재하므로 위치를 잡을 수 있습니다)
-	b.global_position = global_position
-	
-	# 4. 방향 설정
-	var player = get_tree().get_first_node_in_group("player")
-	if player:
-		b.direction = (player.global_position - global_position).normalized()
 
 func _on_body_entered(body: Node2D) -> void:
 	## 적이 CharacterBody2D면 이거 쓰고
