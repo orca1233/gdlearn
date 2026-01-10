@@ -10,6 +10,7 @@ var time_elapsed : int
 var kill_score : int
 var total_score : int
 var item_score : int
+var graze_score : int
 
 func _ready() -> void:
 
@@ -84,8 +85,8 @@ func _input(event):
 
 # 스코어 판 갱신해주는 함수
 func _update_score_display() -> void:
-	# 시간 점수 + 처치 점수
-	total_score = (time_elapsed * 1000) + kill_score + item_score
+	# 시간 점수 + 처치 점수 + 아이템 점수 + 그레이즈 점수
+	total_score = (time_elapsed * 1000) + kill_score + item_score + graze_score
 	$Score.text = "Score : " + str(total_score)
 
 # 1초마다 실행되는 타이머
@@ -104,3 +105,8 @@ func _on_take_item(type, value) -> void:
 	if type == 1:
 		item_score += value # 아이템 점수 저장소에 추가
 		_update_score_display() # 아이템 먹었으니 점수 갱신
+		
+func _on_graze_scored(score: int):
+	graze_score += score
+	_update_score_display()
+	

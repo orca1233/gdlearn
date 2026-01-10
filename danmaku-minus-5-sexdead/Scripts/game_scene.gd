@@ -38,6 +38,9 @@ func _ready() -> void:
 		enemy_spawner.enemy_spawned.connect(_on_enemy_spawned)
 		
 		audio_manager.play_bgm("stage")
+		
+		# graze 연결용
+		player.graze_scored.connect(ui_canvas._on_graze_scored)
 	
 	if option_panel:
 		option_panel.closed.connect(_on_option_panel_closed)

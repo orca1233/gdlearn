@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bkt3kddvmrluk"]
+[gd_scene load_steps=10 format=3 uid="uid://bkt3kddvmrluk"]
 
 [ext_resource type="Texture2D" uid="uid://dvrg17cibrfs4" path="res://Assets/Portrait/playerShip1_blue.png" id="1_6cd4h"]
 [ext_resource type="Script" uid="uid://bx6f0pra6xw6p" path="res://Scripts/player.gd" id="2_7dd06"]
@@ -16,10 +16,16 @@ radius = 3.1622777
 atlas = ExtResource("3_38rej")
 region = Rect2(1280, 704, 64, 64)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_vgqql"]
+radius = 33.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fkybt"]
+atlas = ExtResource("3_38rej")
+region = Rect2(640, 0, 32, 32)
+
 [node name="CharacterBody2D" type="CharacterBody2D" node_paths=PackedStringArray("level1_markers", "level2_markers", "level3_markers", "level4_markers") groups=["player"]]
 collision_mask = 32776
 script = ExtResource("2_7dd06")
-focus_speed = 70.0
 max_life = 1
 bomb_scene = ExtResource("2_vgqql")
 level1_markers = [NodePath("Muzzle/Center")]
@@ -78,4 +84,19 @@ texture = SubResource("AtlasTexture_6t5aa")
 [node name="shoot_timer" type="Timer" parent="."]
 one_shot = true
 
+[node name="Graze" type="Node2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="Graze" groups=["player"]]
+collision_layer = 0
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Graze/Area2D"]
+shape = SubResource("CircleShape2D_vgqql")
+
+[node name="Sprite2D" type="Sprite2D" parent="Graze"]
+scale = Vector2(2.3, 2.3)
+texture = SubResource("AtlasTexture_fkybt")
+
 [connection signal="timeout" from="shoot_timer" to="." method="_on_shoot_timer_timeout"]
+[connection signal="area_entered" from="Graze/Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Graze/Area2D" to="." method="_on_area_2d_area_exited"]

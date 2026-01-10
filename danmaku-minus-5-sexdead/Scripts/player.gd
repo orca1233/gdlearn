@@ -48,6 +48,8 @@ var active_markers: Array[Marker2D] = []
 
 @onready var hitbox_sprite = $HitboxSprite
 @onready var shoot_timer = $shoot_timer
+@onready var graze_sprite = $Graze/Sprite2D
+@onready var graze_area = $Graze/Area2D
 
 # 플레이어가 쏘는 시그널
 signal life_changed(new_life: int)
@@ -55,6 +57,7 @@ signal bomb_changed(new_bomb: int) # 폭탄 개수 변화 신호 추가
 signal player_died
 signal item_collected(amount: int) # 아이템 획득 신호 (UI 연결용)
 signal power_changed(new_power: int) # power 변경 신호
+signal graze_scored(graze_score : int) # graze로 얻는 점수 신호 주기 위함
 
 func _ready() -> void:
 	# 목숨 수 초기화
@@ -74,7 +77,11 @@ func _ready() -> void:
 	
 	# 탄막 한번 초기화
 	check_power_level()
-
+	
+	# graze 초기화
+	graze_sprite.visible = false
+	graze_area.monitorable = false
+	graze_area.monitoring = false
 
 # 충돌이나 slide 어쩌고 할때는 _physics process 쓰는게 좋다는 글을 봄
 func _physics_process(_delta: float) -> void:
@@ -83,12 +90,27 @@ func _physics_process(_delta: float) -> void:
 	var input_dir = Input.get_vector("left", "right", "up", "down")
 	var current_move_speed = speed
 	
-	# 저속 모드 (Shift)
+	# 저속 모드 (Shift) + Graze
 	if Input.is_action_pressed("shift"):
 		current_move_speed = focus_speed
 		hitbox_sprite.visible = true
+		# graze 쪽 option
+		graze_sprite.modulate.a = 0.12 # 50% 투명
+		graze_sprite.rotation += 0.5 * _delta  # 천천히 회전
+		graze_sprite.visible = true
+		graze_area.monitorable = true
+		graze_area.monitoring = true
 	else:
 		hitbox_sprite.visible = false
+		graze_sprite.visible = false
+		
+		# Shift 뗄 때 범위 안의 모든 탄막 Graze 해제
+		if graze_area.monitoring:  # 이전에 활성화되어 있었으면
+			for area in graze_area.get_overlapping_areas(): # area와 겹치는 area(탄) 전부에 대해
+				if area.is_in_group("enemy_bullet") and area.has_method("_remove_graze"):
+					area._remove_graze() # remove graze를 작동
+		graze_area.monitorable = false
+		graze_area.monitoring = false
 
 	velocity = input_dir * current_move_speed
 	move_and_slide()
@@ -270,3 +292,18 @@ func check_power_level():
 	# 그 이후 다시 active markers 찾아서 그 안에 있는 marker만 보이도록 함
 	for marker in active_markers:
 		if marker: marker.visible = true
+
+#=====================
+#     graze 시스템
+#=====================
+# 총알이 들어오면 add graze
+func _on_area_2d_area_entered(area: Area2D) -> void:
+	if area.is_in_group("enemy_bullet"):
+		if area.has_method("_add_graze"):
+			area._add_graze()
+
+# 총알이 나가면 remove graze
+func _on_area_2d_area_exited(area: Area2D) -> void:
+	if area.is_in_group("enemy_bullet"):
+		if area.has_method("_remove_graze"):
+			area._remove_graze()
