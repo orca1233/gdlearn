@@ -4,9 +4,9 @@
 
 [sub_resource type="Curve2D" id="Curve2D_8lfrn"]
 _data = {
-"points": PackedVector2Array(-348.5638, -732.83734, 0, 0, 50, 700, -1738.4846, 37.01935, 1738.4846, -37.01935, 1415.7382, -93.27931)
+"points": PackedVector2Array(0, 0, 0, 0, 1147.5903, -32.999996)
 }
-point_count = 2
+point_count = 1
 
 [node name="enemypath" type="Path2D"]
 scale = Vector2(0.996, 1)

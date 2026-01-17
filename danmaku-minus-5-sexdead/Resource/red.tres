@@ -12,10 +12,12 @@ region = Rect2(48, 192, 16, 16)
 
 [resource]
 script = ExtResource("1_7pshj")
-pattern_type = 2
+pattern_type = 1
 texture = SubResource("AtlasTexture_w5r11")
 collision_shape = SubResource("CircleShape2D_kqmel")
 speed = 200.0
-fire_rate = 1.0
 bullet_count = 40
+spread_angle = 0.0
+is_aimed = true
+rotate_speed = 0.0
 metadata/_custom_type_script = "uid://bkeye01eemqwl"

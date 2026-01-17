@@ -39,23 +39,27 @@ func start_spawn_routine(event: SpawnEvent) -> void:
 func spawn_single_enemy(event: SpawnEvent, is_mirrored: bool = false) -> void:
 	# event에서 path_scene을 가져와서 인스턴스화하고 path_inst에 저장
 	var path_inst = event.enemy_path.instantiate()
-	# get_tree().current_scene.add_child(path_inst)
-	# EnemyContainer에 추가
-	get_tree().current_scene.enemy_container.add_child(path_inst)
 	
-	# 만약 is_mirrored가 체크되어 있으면(TRUE)
+	# 미러 처리를 add_child 전에 수행
 	if is_mirrored:
 		# Path를 -1(반대편)으로 보냄
 		path_inst.scale.x = -1
 		# 화면 오른쪽 끝으로 이동
 		path_inst.position.x = get_viewport_rect().size.x
-		
+	
+	# 위치 설정 후에 EnemyContainer에 추가
+	get_tree().current_scene.enemy_container.add_child(path_inst)
+	
+	# PathFollow2D에 미러 플래그 설정
+	var path_follow = path_inst.get_node("PathFollow2D")
+	if path_follow:
+		path_follow.is_mirrored = is_mirrored
+	
 	# Enemy도 똑같이 저장
 	var enemy_inst = event.enemy_scene.instantiate()
 	
 	# enemy를 PathFollow2D에 추가해주기 위해 찾기
 	# 이름이 PathFollow2D라서 거기에 추가
-	var path_follow = path_inst.get_node("PathFollow2D")
 	if path_follow:
 		# 적을 PathFollow의 자식으로 붙임 (그래야 따라감)
 		path_follow.add_child(enemy_inst)
