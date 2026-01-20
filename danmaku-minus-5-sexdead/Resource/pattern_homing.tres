@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="BulletPatternData" load_steps=5 format=3 uid="uid://b3vgy4b843hom"]
+
+[ext_resource type="Script" uid="uid://bkeye01eemqwl" path="res://Scripts/boss_pattern_data.gd" id="1_hom"]
+[ext_resource type="Texture2D" uid="uid://bqh1v8dybny2e" path="res://Assets/Danmaku/Shot_01.png" id="2_hom"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hom"]
+radius = 8.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hom"]
+atlas = ExtResource("2_hom")
+region = Rect2(48, 192, 16, 16)
+
+[resource]
+script = ExtResource("1_hom")
+pattern_type = 1
+move_type = 3
+texture = SubResource("AtlasTexture_hom")
+collision_shape = SubResource("CircleShape2D_hom")
+speed = 150.0
+homing_strength = 80.0
+homing_duration = 2.5
+fire_rate = 0.3
+bullet_count = 3
+spread_angle = 30.0
+is_aimed = false
+rotate_speed = 0.0
+metadata/_custom_type_script = "uid://bkeye01eemqwl"

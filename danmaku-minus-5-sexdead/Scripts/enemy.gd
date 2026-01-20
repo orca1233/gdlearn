@@ -4,9 +4,6 @@ extends Area2D
 @export var item_scene : PackedScene # 에디터에서 item씬
 
 @export var damage : int = 1
-var can_shoot = false
-var shoot_timer = 0.0
-@export var shoot_interval = 0.04 # 발사 간격
 @export var max_life = 1
 @onready var current_life = max_life
 

@@ -3,6 +3,7 @@ extends Resource
 class_name BulletPatternData
 
 enum ShootType { SPIRAL, SPREAD, CIRCLE_BURST }
+enum MoveType { LINEAR, ACCELERATE, CURVE, HOMING, STOP_AND_CHANGE }
 
 @export_group("Base Info")
 @export var pattern_type: ShootType = ShootType.SPIRAL
@@ -11,8 +12,25 @@ enum ShootType { SPIRAL, SPREAD, CIRCLE_BURST }
 @export var sprite_rotation: float = 0.0
 
 @export_group("Movement")
+@export var move_type: MoveType = MoveType.LINEAR
 @export var speed: float = 300.0
 @export var speed_variance: float = 0.0 # 산탄용: 총알마다 속도가 얼마나 다를지 (0~100 등)
+
+## ACCELERATE 타입용
+@export var acceleration: float = 50.0  # 가속도 (양수: 가속, 음수: 감속)
+
+## CURVE 타입용
+@export var curve_amplitude: float = 50.0  # 곡선 진폭 (얼마나 휘는지)
+@export var curve_frequency: float = 2.0   # 곡선 주파수 (얼마나 자주 휘는지)
+
+## HOMING 타입용
+@export var homing_strength: float = 100.0  # 유도 강도
+@export var homing_duration: float = 2.0    # 유도 지속 시간 (초)
+
+## STOP_AND_CHANGE 타입용
+@export var stop_time: float = 0.5          # 정지 시간 (초)
+@export var stop_trigger_time: float = 1.0  # 몇 초 후에 정지할지
+@export var change_angle: float = 180.0     # 방향 전환 각도 (도)
 
 @export_group("Firing")
 @export var fire_rate: float = 0.1
