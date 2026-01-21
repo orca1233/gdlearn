@@ -4,3 +4,5 @@
 .godot_mcp_token
 /addons/
 .vscode/
+.godot_mcp/
+COMMIT_SUMMARY.md
