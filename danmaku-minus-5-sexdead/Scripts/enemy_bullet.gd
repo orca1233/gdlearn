@@ -157,10 +157,10 @@ func _on_body_entered(body: Node2D) -> void:
 		## TODO take_damage 메소드 -> 라이프 -1, 라이프 = 0이면 queue_free해주고 사망 연출 instantiate
 		## _take_damage로는 int 전달함. 데미지 바꾸고 싶으면 player_bullet에서
 		body._take_damage(damage)
-		queue_free()
+		return_to_pool()
 
 func _on_visible_on_screen_notifier_2d_screen_exited():
-	queue_free()
+	return_to_pool()
 
 func _add_graze():
 	if not is_grazed: # graze 상태가 아니면
@@ -181,3 +181,32 @@ func _give_graze_score():
 	var player = get_tree().get_first_node_in_group("player") # player를 가져옴
 	if player and player.has_signal("graze_scored"): # 플레이어가 있고(오류방지용), 플레이어에게 해당 시그널 있으면
 		player.graze_scored.emit(GRAZE_SCORE_PER_TICK) # 점수 발송(int)
+
+# Pooling 관련 함수들
+func return_to_pool():
+	# 상태 초기화
+	reset_bullet_state()
+	
+	# BulletPool에 반환
+	BulletPool.return_bullet_to_pool(self)
+
+func reset_bullet_state():
+	# 모든 상태 변수 초기화
+	direction = Vector2.ZERO
+	speed = 0.0
+	original_speed = 0.0
+	move_type = BulletPatternData.MoveType.LINEAR
+	pattern_data = null
+	lifetime = 0.0
+	curve_time = 0.0
+	initial_direction = Vector2.ZERO
+	homing_active = false
+	has_stopped = false
+	stop_elapsed = 0.0
+	is_stopped = false
+	is_grazed = false
+	has_scored_graze = false
+	graze_timer = 0.0
+	
+	# 그래픽 상태 초기화
+	modulate = Color(1.0, 1.0, 1.0)

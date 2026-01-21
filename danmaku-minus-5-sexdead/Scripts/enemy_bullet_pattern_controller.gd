@@ -79,8 +79,25 @@ func _on_fire_timeout():
 				shoot(base_angle + (step * i))
 
 func shoot(angle: float):
-	var bullet = bullet_node.instantiate()
-	# get_tree().current_scene.add_child(bullet)
+	var bullet = null
+	
+	# BulletPool 사용 여부 확인
+	if BulletPool.instance != null:
+		# Pool에서 bullet 가져오기
+		bullet = BulletPool.get_bullet_from_pool()
+		
+		# Pool에 bullet_scene이 설정되어 있지 않으면 초기화
+		if BulletPool.instance.bullet_scene == null:
+			BulletPool.instance.bullet_scene = bullet_node
+	else:
+		# Pool이 없으면 기존 방식으로 생성
+		bullet = bullet_node.instantiate()
+	
+	if bullet == null:
+		# Emergency fallback
+		bullet = bullet_node.instantiate()
+		print("Bullet creation failed, using fallback instantiate")
+	
 	# BulletContainer에 추가
 	get_tree().current_scene.bullet_container.add_child(bullet)
 	
