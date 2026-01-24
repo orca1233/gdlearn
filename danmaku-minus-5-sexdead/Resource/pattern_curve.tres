@@ -13,15 +13,14 @@ region = Rect2(32, 192, 16, 16)
 [resource]
 script = ExtResource("1_crv")
 pattern_type = 1
-move_type = 2
 texture = SubResource("AtlasTexture_crv")
 collision_shape = SubResource("CircleShape2D_crv")
+move_type = 2
 speed = 180.0
 curve_amplitude = 80.0
 curve_frequency = 3.0
 fire_rate = 0.2
 bullet_count = 5
 spread_angle = 90.0
-is_aimed = true
 rotate_speed = 0.0
 metadata/_custom_type_script = "uid://bkeye01eemqwl"

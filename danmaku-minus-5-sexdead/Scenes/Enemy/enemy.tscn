@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://co8vgy4b843rn"]
+[gd_scene load_steps=14 format=3 uid="uid://co8vgy4b843rn"]
 
 [ext_resource type="Texture2D" uid="uid://dvrg17cibrfs4" path="res://Assets/Portrait/playerShip1_blue.png" id="1_atlr2"]
 [ext_resource type="Script" uid="uid://2fclj5kde7eh" path="res://Scripts/enemy.gd" id="1_e2b7p"]
@@ -6,7 +6,12 @@
 [ext_resource type="PackedScene" uid="uid://di7d2tor3pfii" path="res://Scenes/item.tscn" id="3_dmwl5"]
 [ext_resource type="Script" uid="uid://cbqrlw5xqm2b" path="res://Scripts/enemy_bullet_pattern_controller.gd" id="5_d40jh"]
 [ext_resource type="Script" uid="uid://bkeye01eemqwl" path="res://Scripts/boss_pattern_data.gd" id="6_gx76c"]
-[ext_resource type="Resource" uid="uid://hr618uga0tqc" path="res://Resource/red.tres" id="7_pqgp3"]
+[ext_resource type="Resource" uid="uid://d2vgy4b843crv" path="res://Resource/pattern_curve.tres" id="7_beese"]
+[ext_resource type="Resource" uid="uid://b3vgy4b843hom" path="res://Resource/pattern_homing.tres" id="8_1vi6b"]
+[ext_resource type="Resource" uid="uid://cchle2e0kveqk" path="res://Resource/pattern_aimed_curve.tres" id="9_r1w2j"]
+[ext_resource type="Resource" uid="uid://c8vgy4b843acc" path="res://Resource/pattern_accelerate.tres" id="10_u4wq1"]
+[ext_resource type="Resource" uid="uid://4vgy4b843sac" path="res://Resource/pattern_stop_and_change.tres" id="11_5luce"]
+[ext_resource type="Resource" uid="uid://bbhle2e0kvwxi" path="res://Resource/pattern_spiral_accelerate.tres" id="12_xmc1t"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_e2b7p"]
 radius = 11.045361
@@ -19,7 +24,6 @@ collision_mask = 3
 script = ExtResource("1_e2b7p")
 bullet_scene = ExtResource("2_2g0jp")
 item_scene = ExtResource("3_dmwl5")
-shoot_interval = 0.2
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(1, -8.742278e-08)
@@ -42,6 +46,6 @@ autostart = true
 [node name="bullet" type="Node2D" parent="."]
 script = ExtResource("5_d40jh")
 bullet_node = ExtResource("2_2g0jp")
-patterns = Array[ExtResource("6_gx76c")]([ExtResource("7_pqgp3")])
+patterns = Array[ExtResource("6_gx76c")]([ExtResource("7_beese"), ExtResource("8_1vi6b"), ExtResource("9_r1w2j"), ExtResource("10_u4wq1"), ExtResource("11_5luce"), ExtResource("12_xmc1t")])
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

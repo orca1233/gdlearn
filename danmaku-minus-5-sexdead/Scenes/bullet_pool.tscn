@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=3 format=3 uid="uid://ctpvcancy6f0d"]
 
-[ext_resource type="Script" path="res://Scripts/bullet_pool.gd" id="1_rpi6b"]
+[ext_resource type="Script" uid="uid://djbola6r5n6ad" path="res://Scripts/bullet_pool.gd" id="1_rpi6b"]
+[ext_resource type="PackedScene" uid="uid://c5btjhmhi6l4x" path="res://Scenes/enemy_bullet.tscn" id="2_xxxmb"]
 
 [node name="root" type="Node"]
 script = ExtResource("1_rpi6b")
+bullet_scene = ExtResource("2_xxxmb")

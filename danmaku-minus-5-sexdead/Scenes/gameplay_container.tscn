@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://b3lv2cgck0rfu"]
+[gd_scene load_steps=8 format=3 uid="uid://b3lv2cgck0rfu"]
 
 [ext_resource type="PackedScene" uid="uid://bkt3kddvmrluk" path="res://Scenes/player.tscn" id="1_7shky"]
 [ext_resource type="Script" uid="uid://dnt2no7201hnm" path="res://Scripts/enemy_spawner.gd" id="2_28uw7"]
 [ext_resource type="Script" uid="uid://c351bv2pb62ek" path="res://Resource/spawn_event.gd" id="3_qkro7"]
 [ext_resource type="PackedScene" uid="uid://bbka7ag0x2ol5" path="res://Scenes/Path/enemy_path.tscn" id="4_8fy4n"]
 [ext_resource type="PackedScene" uid="uid://co8vgy4b843rn" path="res://Scenes/Enemy/enemy.tscn" id="5_qkro7"]
+[ext_resource type="PackedScene" uid="uid://ctpvcancy6f0d" path="res://Scenes/bullet_pool.tscn" id="6_8fy4n"]
 
 [sub_resource type="Resource" id="Resource_i4478"]
 script = ExtResource("3_qkro7")
@@ -28,3 +29,5 @@ position = Vector2(576, 600)
 [node name="EnemySpawner" type="Node2D" parent="."]
 script = ExtResource("2_28uw7")
 events = Array[ExtResource("3_qkro7")]([SubResource("Resource_i4478")])
+
+[node name="bullet_pool" parent="." instance=ExtResource("6_8fy4n")]

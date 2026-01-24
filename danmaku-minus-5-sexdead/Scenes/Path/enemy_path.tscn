@@ -17,3 +17,7 @@ position = Vector2(50, 700)
 rotates = false
 loop = false
 script = ExtResource("1_vfsvd")
+path_type = 1
+move_duration = 5.0
+circle_radius = 150.0
+circle_speed = 0.5

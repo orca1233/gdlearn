@@ -7,7 +7,7 @@ static var instance: BulletPool = null
 
 # Pool settings
 @export var initial_pool_size: int = 50
-@export var max_pool_size: int = 200
+@export var max_pool_size: int = 1000
 @export var bullet_scene: PackedScene
 
 # Pool containers
